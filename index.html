@@ -430,6 +430,7 @@ footer{color:var(--soft);border-top:1px solid rgba(255,46,136,.2)}
 .ag-rh{font-weight:800;font-size:12px;letter-spacing:.06em;opacity:.8;margin-bottom:4px}
 .ag-link{font-weight:700;color:#22b8ff;text-decoration:none;white-space:nowrap}
 .ag-btn{border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit;border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;margin-top:4px}
+.ag-src{margin-top:6px;font-size:12px;opacity:.85}.ag-src a{color:#22b8ff;font-weight:700;text-decoration:none}
 .ag-post{margin:8px 0;padding:8px;border-radius:10px;background:rgba(255,255,255,.08)}
 </style>
 </head>
@@ -1022,7 +1023,7 @@ const ADDR_RE=/\b([1-9A-HJ-NP-Za-km-z]{32,44}|0x[a-fA-F0-9]{40})\b/;
 const RULES='IMPORTANT RULES FOR THIS CHAT: The crew are working agents on this site. The jobs that really work (the user taps the button or just asks): '+
  'Lucia makes a trade plan for any coin from the live chart; Jason finds the best Solana yields; Méndez does a full scam check on any coin; Macca writes 3 X posts with a one-tap Post on X button; '+
  'Gato gives live prices for any coin and sets a price alarm while the page is open; Rocco researches any question; Boobie Ike values a portfolio and says what to move; Raul scans brand-new Solana launches and safety-checks them; Big Guy checks links for scam tricks and scans Solana wallets for junk tokens. '+
- 'Agents NEVER place trades, move money, connect wallets or post on the user\'s behalf — they hand over the plan and the links and the user acts. If asked for something outside these jobs, say so kindly and point to the crew member whose job fits. Never ask for a seed phrase or private key.';
+ 'Agents NEVER place trades, move money, connect wallets or post on the user\'s behalf — they hand over the plan and the links and the user acts. For any other question at all (football, news, weather, general knowledge), just answer it — search the web if it needs current info. If a crew member’s job fits better, mention them. Never ask for a seed phrase or private key.';
 let AI_FAILS=0,AI_RETRY_AT=0;
 function aiAvailable(){return location.protocol!=='file:'&&(AI_FAILS<2||Date.now()>AI_RETRY_AT)}
 function ask(t,typed){
@@ -1054,7 +1055,7 @@ function ask(t,typed){
   const c=who?{id:who.id,name:who.name,role:who.role,quote:who.quote,bio:who.bio+' '+RULES,sig:who.sig,voice:who.voice,skills:(who.now||[]),comingSoon:(who.soon||[]),job:who.job,rules:RULES}:null;
   const ctl=('AbortController' in window)?new AbortController():null;const to=setTimeout(()=>ctl&&ctl.abort(),25000);
   fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctl?ctl.signal:undefined,body:JSON.stringify({character:c,rules:RULES,messages:HIST,ticker:CONFIG.ticker,chain:CONFIG.chain,ca:CONFIG.contractAddress,links:{x:CONFIG.x,telegram:CONFIG.telegram},tool:''})})
-   .then(r=>{clearTimeout(to);if(!r.ok)throw 0;return r.json()}).then(j=>{if(!j.reply)throw 0;AI_FAILS=0;typing.remove();HIST.push({role:'assistant',content:j.reply});addMsg(fmt(j.reply),'bot',chipsFor(who))})
+   .then(r=>{clearTimeout(to);if(!r.ok)throw 0;return r.json()}).then(j=>{if(!j.reply)throw 0;AI_FAILS=0;typing.remove();HIST.push({role:'assistant',content:j.reply});addMsg(fmt(j.reply)+srcHtml(j.sources),'bot',chipsFor(who))})
    .catch(()=>{clearTimeout(to);AI_FAILS++;if(AI_FAILS>=2)AI_RETRY_AT=Date.now()+60000;HIST.pop();scripted()});
 }
 var PENDING_TOOL='';let HIST=[];
@@ -1083,6 +1084,7 @@ function toolPosts(c){const tk=CONFIG.ticker||'$GTA6AGENT',x=[
  `GM Leonida ☀️ Live prices from Gato, scam checks from Méndez, posts from Macca. The crew is working. ${tk}`];
  const pick=x.sort(()=>Math.random()-.5).slice(0,3);
  return'<b>Drinks on me — here are your 3 posts! 🍹</b><br>'+pick.map((p,i)=>`<div style="margin:8px 0;padding:8px;border-radius:10px;background:rgba(255,255,255,.08)">${i+1}. ${esc(p)}<br><button type="button" class="say" onclick="copy(this.dataset.t)" data-t="${esc(p)}">📋 Copy</button></div>`).join('')+'<small>Copy and post them yourself on X.</small>'}
+function srcHtml(a){if(!a||!a.length)return'';return'<div class="ag-src">🔎 '+a.slice(0,3).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc((x.title||x.url).slice(0,40))}</a>`).join(' · ')+'</div>'}
 function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}
 $('#chatForm').onsubmit=e=>{e.preventDefault();primeSpeech();const t=$('#chatInput').value.trim();if(!t)return;openChat();$('#chatInput').value='';ask(t,true)};
 
@@ -1127,13 +1129,15 @@ const verdict=n=>n>=3?'🔴 CROOKED':n?'🟡 SUS':'🟢 CLEAN';
 const levelOf=t=>/bold|aggressive|degen|risky/i.test(t)?'Bold':/careful|safe|low risk|cautious/i.test(t)?'Careful':(S&&S.fromBuilder?S.level:'Balanced');
 const jupLink=m=>m.chain==='solana'&&m.address?`https://jup.ag/swap/SOL-${m.address}`:(m.chain==='solana'?'https://jup.ag/swap/USDC-SOL':m.url);
 const A=(href,txt)=>`<a href="${href}" target="_blank" rel="noopener" class="ag-link">${txt}</a>`;
+const SRC_MARK='@@SRC@@';
+const splitSrc=r=>{if(!r)return[r,''];const i=r.indexOf(SRC_MARK);if(i<0)return[r,''];let a=[];try{a=JSON.parse(r.slice(i+SRC_MARK.length))}catch(e){}return[r.slice(0,i).trim(),srcHtml(a)]};
 const COPYBTN=t=>`<button type="button" class="ag-btn" onclick="copy(this.dataset.t)" data-t="${esc(t)}">📋 Copy</button>`;
 
 /* AI helper — uses the site's real AI (Netlify function). Returns null if it can't be reached. */
-async function aiText(c,prompt){if(!aiAvailable())return null;
+async function aiText(c,prompt,keepSrc){if(!aiAvailable())return null;
  const ch=c?{id:c.id,name:c.name,role:c.role,quote:c.quote,bio:c.bio+' '+RULES,sig:c.sig,voice:c.voice,skills:c.now,job:c.job,rules:RULES}:null;
  try{const j=await J('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({character:ch,rules:RULES,messages:[{role:'user',content:prompt}],ticker:CONFIG.ticker,chain:CONFIG.chain,ca:CONFIG.contractAddress,links:{x:CONFIG.x,telegram:CONFIG.telegram},tool:''})});
-  AI_FAILS=0;return j.reply||null}catch(e){AI_FAILS++;if(AI_FAILS>=2)AI_RETRY_AT=Date.now()+60000;return null}}
+  AI_FAILS=0;return j.reply?(keepSrc?(j.reply+(j.sources&&j.sources.length?'\n\n'+SRC_MARK+JSON.stringify(j.sources):'')):j.reply):null}catch(e){AI_FAILS++;if(AI_FAILS>=2)AI_RETRY_AT=Date.now()+60000;return null}}
 
 /* The plan → act → deliver card shown in the chat */
 function agentUI(c,title){const d=document.createElement('div');d.className='msg bot agentrun';
@@ -1228,9 +1232,9 @@ const AG={
   steps:['Sniff out what you need','Fetch live data if a coin is involved','Think it through','Explain it in plain words'],
   async run(t,ui,c){let s=ui.step('Sniffing out what you need');s.ok();let data='';const q=extractCoin(t);
    if(q&&(CG[q.toLowerCase()]||ADDR_RE.test(q)||/\$/.test(t))){s=ui.step('Fetching live data');try{const m=await getMarket(q);data=`Live data: ${m.symbol} price ${m.price} USD, 1h ${m.ch1.toFixed(1)}%, 24h ${m.ch24.toFixed(1)}%${m.liq?', liquidity '+Math.round(m.liq)+' USD':''}.`;s.ok(`${m.symbol} ${P(m.price)} (${pct(m.ch24)} 24h)`)}catch(e){s.bad('no live data')}}
-   s=ui.step('Thinking it through');const r=await aiText(c,`${t}\n\n${data}\nAnswer simply for a beginner in under 120 words, in character as Rocco. If they ask you to do something you can't do, say which crew member can.`);
-   let ans=r?fmt(r):null;if(!ans){ans=reply(t)[0];s.bad('AI busy — quick answer')}else s.ok();
-   ui.deliver(ans,(r||ans).replace(/<[^>]+>/g,''),['🐾 Ask Rocco anything','What can you do?'])}},
+   s=ui.step('Thinking it through');const r=await aiText(c,`${t}\n\n${data}\nAnswer simply for a beginner in under 120 words, in character as Rocco. If they ask you to do something you can't do, say which crew member can. Search the web if it needs current info.`,true);
+   const [rt,rs]=splitSrc(r);let ans=rt?fmt(rt)+rs:null;if(!ans){ans=reply(t)[0];s.bad('AI busy — quick answer')}else s.ok(rs?'searched the web':'');
+   ui.deliver(ans,(rt||ans).replace(/<[^>]+>/g,''),['🐾 Ask Rocco anything','What can you do?'])}},
  boobie:{label:'👑 Plan my portfolio',title:'Portfolio boss',live:'Values your bag live and tells you exactly what to move to balance it',
   prompt:'Tell me what you hold — e.g. <b>“2 SOL, 500 USDC, 1m BONK”</b>. Add careful, balanced or bold.',ex:['2 SOL, 500 USDC, 1m BONK','0.05 BTC, 3 SOL, 200 USDT bold'],
   steps:['Count the empire — read your holdings','Price every coin live','Add it all up','Compare to the right split for your style','Tell you exactly what to move'],
