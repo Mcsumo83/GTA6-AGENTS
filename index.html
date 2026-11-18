@@ -400,6 +400,12 @@ footer{color:var(--soft);border-top:1px solid rgba(255,46,136,.2)}
 .rcap b{font-family:Impact,Haettenschweiler,"Arial Narrow Bold","HelveticaNeue-CondensedBlack",sans-serif;font-style:italic;text-transform:uppercase;font-size:34px;line-height:1.05;color:#fff;text-shadow:0 0 18px var(--c),0 2px 8px rgba(0,0,0,.8)}
 .rcap small{color:var(--c);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;filter:brightness(1.3)}
 @media(max-width:820px){.rcap b{font-size:26px}.rcap{padding-bottom:28px}}
+.say{display:inline-flex;align-items:center;gap:4px;margin-top:8px;background:transparent;border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.chat-panel.incharacter .say{border-color:var(--c);color:var(--c)}
+#voiceBtn{margin-right:6px}
+.livetag{display:inline-flex;gap:8px;align-items:center;background:rgba(34,228,255,.12);border:1px solid rgba(34,228,255,.45);color:#cdf8ff;border-radius:999px;padding:6px 12px;font-size:13px;margin-bottom:14px}
+.livetag b{color:#22e4ff;letter-spacing:.06em}
+.livemini{margin-top:6px;font-size:11px;font-weight:800;color:#22e4ff;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -620,7 +626,7 @@ const CONFIG = {
 
 <!-- CHAT -->
 <div class="chat-panel" id="chatPanel">
-  <div class="cp-head"><span class="g6">G6</span><b>Vice City Guide<small>● Online — here to help</small></b><button id="closeChat" aria-label="Close">✕</button></div>
+  <div class="cp-head"><span class="g6">G6</span><b>Vice City Guide<small>● Online — here to help</small></b><button id="voiceBtn" aria-label="Voice on/off" title="Voice on/off">🔊</button><button id="closeChat" aria-label="Close">✕</button></div>
   <div class="msgs" id="msgs"></div>
 </div>
 <form class="chatbar" id="chatForm">
@@ -818,10 +824,16 @@ const EXTRA={
   voice:['Grr.','Nobody touches the bag.','All clear, boss.']}
 };
 CREW.forEach(c=>{if(!c.locked&&EXTRA[c.id])Object.assign(c,EXTRA[c.id])});
+
+const LIVE={
+ mendez:{label:'🔍 Check a coin',live:'Real coin checks — paste any contract address',run:c=>{talkTo(c);addMsg("Paste a contract address below and I’ll run it through the system. <b>Clean, Sus or Crooked</b> — you’ll know in seconds.",'bot');setTimeout(()=>$('#chatInput').focus(),300)}},
+ gato:{label:'📈 Live prices',live:'Real-time SOL, BTC & ETH prices',run:c=>{talkTo(c);setTimeout(()=>{PENDING_TOOL='prices';ask('What are SOL, BTC and ETH doing right now?',true)},400)}},
+ macca:{label:'✍️ Write my posts',live:'Writes 3 ready-to-copy X posts for you',run:c=>{talkTo(c);setTimeout(()=>{PENDING_TOOL='posts';ask('Write me 3 hype posts for X about '+CONFIG.ticker,true)},400)}}
+};
 function renderCrew(){
  $('#crewGrid').innerHTML=CREW.map((c,i)=>c.locked?
   `<div class="char locked"><div class="pic">?</div><div class="meta"><div class="role">Coming soon</div><div class="line">New agent unlocking…</div></div></div>`:
-  `<button class="char" data-i="${i}" style="--c:${c.c};--c2:${c.c2}"><div class="pic"><img src="${c.img}" alt="${c.name}"><span class="badge">${c.badge}</span><span class="tagname">${c.name}</span></div><div class="meta"><div class="role">${c.role}</div><div class="line">${c.line}</div><div class="sigmini">★ ${c.sig[0]}</div></div></button>`).join('');
+  `<button class="char" data-i="${i}" style="--c:${c.c};--c2:${c.c2}"><div class="pic"><img src="${c.img}" alt="${c.name}"><span class="badge">${c.badge}</span><span class="tagname">${c.name}</span></div><div class="meta"><div class="role">${c.role}</div><div class="line">${c.line}</div><div class="sigmini">★ ${c.sig[0]}</div>${LIVE[c.id]?`<div class="livemini">● LIVE · ${LIVE[c.id].label.slice(2).trim()}</div>`:""}</div></button>`).join('');
  $$('#crewGrid .char[data-i]').forEach(b=>b.onclick=()=>showProfile(+b.dataset.i));
 }
 function showProfile(i){
@@ -833,11 +845,13 @@ function showProfile(i){
   <div class="sig"><small>Signature move</small><b>★ ${c.sig[0]}</b><span>${c.sig[1]}</span></div>
   <div class="bars">${Object.entries(c.stats).map(([k,v])=>`<div class="bar">${k}<div><i style="width:${v}%"></i></div></div>`).join('')}</div>
   <div class="skills">${c.skills.map(s=>`<span>${s}</span>`).join('')}</div>
-  <div class="pbtns"><button class="btn pbtn" id="useChar">Put ${c.name} to work →</button><button class="btn btn-light" id="talkChar">💬 Talk to ${c.name}</button></div></div>`;
+  ${LIVE[c.id]?`<div class="livetag"><b>● LIVE</b> ${LIVE[c.id].live}</div>`:''}
+  <div class="pbtns">${LIVE[c.id]?`<button class="btn pbtn" id="toolChar">${LIVE[c.id].label}</button>`:''}<button class="btn ${LIVE[c.id]?'btn-light':'pbtn'}" id="useChar">Put ${c.name} to work →</button><button class="btn btn-light" id="talkChar">💬 Talk to ${c.name}</button></div></div>`;
  p.style.setProperty('--c',c.c);p.style.setProperty('--c2',c.c2);
  p.classList.add('show');
  $('#useChar').onclick=()=>useChar(c);
  $('#talkChar').onclick=()=>talkTo(c);
+ if(LIVE[c.id])$('#toolChar').onclick=()=>{primeSpeech();LIVE[c.id].run(c)};
  if(innerWidth<860)p.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function useChar(c){
@@ -882,24 +896,51 @@ const panel=$('#chatPanel'),msgs=$('#msgs');let greeted=false,TALK=null;
 function setHead(c){const hd=$('.cp-head');const av=hd.querySelector('.g6,.cav');
  if(c){av.outerHTML=`<img class="cav" src="${c.img}" alt="">`;hd.querySelector('b').innerHTML=`${c.name}<small>● ${c.role} — in character</small>`;panel.style.setProperty('--c',c.c);panel.classList.add('incharacter')}
  else{av.outerHTML='<span class="g6">G6</span>';hd.querySelector('b').innerHTML='Vice City Guide<small>● Online — here to help</small>';panel.classList.remove('incharacter')}}
-function talkTo(c){TALK=c;HIST=[];greeted=true;panel.classList.add('open');setHead(c);msgs.innerHTML='';addMsg(c.hi,'bot',['What can you do?','Put you to work','Back to the guide'])}
+function talkTo(c){primeSpeech();TALK=c;HIST=[];greeted=true;panel.classList.add('open');setHead(c);msgs.innerHTML='';addMsg(c.hi,'bot',[...(LIVE[c.id]?[LIVE[c.id].label]:[]),'What can you do?','Back to the guide'])}
 function charReply(c,t){const q=t.toLowerCase(),v=c.voice[Math.floor(Math.random()*c.voice.length)];
  if(/^(hi|hey|hello|yo|sup)\b/.test(q))return[c.hi,['What can you do?','Put you to work']];
  if(/what can you|what do you do|your job|skills/.test(q))return[`<b>${v}</b><br>I’m ${c.role.toLowerCase().replace('the ','your ')}. My signature move is <b>${c.sig[0]}</b>: ${c.sig[1]}<br>${c.skills.map(s=>'• '+s).join('<br>')}`,['Put you to work','Back to the guide']];
  if(/who are you|about you|tell me about/.test(q))return[`<b>${c.quote}</b><br>${c.bio}`,['What can you do?','Put you to work']];
  const [a,qs]=reply(t);return[`<b>${v}</b><br>${a}`,qs];}
 function addMsg(html,who,qs){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html;
-  if(qs){const w=document.createElement('div');w.className='qs';qs.forEach(q=>{const b=document.createElement('button');b.type='button';b.textContent=q;b.onclick=()=>ask(q);w.appendChild(b)});d.appendChild(w)}
+  if(qs){const w=document.createElement('div');w.className='qs';qs.forEach(q=>{const b=document.createElement('button');b.type='button';b.textContent=q;b.onclick=()=>{primeSpeech();ask(q)};w.appendChild(b)});d.appendChild(w)}
+  if(who==='bot'&&SYN){const t=document.createElement('div');t.innerHTML=html;const plain=t.textContent;
+   const s=document.createElement('button');s.type='button';s.className='say';s.textContent='🔊 Play';s.onclick=()=>{primeSpeech();speak(plain,TALK)};d.appendChild(s);
+   if(VOICE_ON&&PRIMED)speak(plain,TALK)}
   msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight}
+/* ===== VOICES ===== */
+const SYN=('speechSynthesis' in window)?window.speechSynthesis:null;let VOICE_ON=true,PRIMED=false;
+const VP={
+ guide:{p:1.05,r:1.05,v:['Samantha','Google US English','Microsoft Aria','Ava','Allison','female']},
+ lucia:{p:1.0,r:1.08,v:['Paulina','Monica','Samantha','Microsoft Jenny','Google US English','female']},
+ jason:{p:0.9,r:0.98,v:['Alex','Aaron','Microsoft Guy','Google US English','Daniel','male']},
+ mendez:{p:0.6,r:0.88,v:['Juan','Jorge','Diego','Fred','Microsoft Guy','Daniel','male']},
+ macca:{p:1.45,r:1.18,v:['Daniel','Google UK English Male','Arthur','Gordon','male']},
+ gato:{p:1.35,r:0.78,v:['Whisper','Moira','Samantha','female']},
+ rocco:{p:1.25,r:1.15,v:['Karen','Google UK English Female','Samantha','female']},
+ boobie:{p:0.45,r:0.88,v:['Aaron','Fred','Microsoft Guy','Alex','male']},
+ raul:{p:0.75,r:0.92,v:['Jorge','Diego','Juan','Daniel','male']},
+ bigguy:{p:0.3,r:0.8,v:['Fred','Ralph','Aaron','Microsoft Guy','male']}
+};
+function pickVoice(pref){const all=SYN.getVoices();const en=all.filter(v=>/^en/i.test(v.lang));
+ for(const n of pref){const v=all.find(v=>v.name.toLowerCase().includes(n.toLowerCase())&&(/^(en|es)/i.test(v.lang)));if(v)return v}
+ return en.find(v=>v.default)||en[0]||null}
+function speak(text,c){if(!SYN)return;SYN.cancel();const p=VP[c&&c.id]||VP.guide;
+ const clean=text.replace(/🔊 Play/g,'').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').replace(/[•★…]/g,' ').replace(/\s+/g,' ').trim();if(!clean)return;
+ const u=new SpeechSynthesisUtterance(clean);const v=pickVoice(p.v);if(v){u.voice=v;u.lang=v.lang}u.pitch=p.p;u.rate=p.r;SYN.speak(u)}
+function primeSpeech(){if(SYN&&!PRIMED){PRIMED=true;try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;SYN.speak(u)}catch(e){}}}
+if(SYN){SYN.getVoices();SYN.onvoiceschanged=()=>SYN.getVoices()}
 function openChat(){panel.classList.add('open');if(!greeted){greeted=true;addMsg("Hi! 👋 I'm your Vice City Guide. Ask me anything — no question is too simple.",'bot',['What is GTA6 Agent?','How do I start?','Is it safe?','How do I buy $GTA6AGENT?'])}}
-$('#closeChat').onclick=()=>panel.classList.remove('open');
-$('#chatInput').onfocus=openChat;
+$('#closeChat').onclick=()=>{panel.classList.remove('open');if(SYN)SYN.cancel()};
+if(!('speechSynthesis' in window))$('#voiceBtn').style.display='none';
+$('#voiceBtn').onclick=()=>{VOICE_ON=!VOICE_ON;$('#voiceBtn').textContent=VOICE_ON?'🔊':'🔇';if(!VOICE_ON&&SYN)SYN.cancel();else primeSpeech()};
+$('#chatInput').onfocus=()=>{primeSpeech();openChat()};
 function reply(t){const q=t.toLowerCase();
   if(/^(hi|hey|hello|yo|sup)\b/.test(q))return["Hey! 😊 What would you like your agent to do? Or ask me how anything works.",['How do I start?','What can agents do?']];
   if(/what.*(sumo|gta6|agent|this site)|what is this|what do you do/.test(q))return["GTA6 Agent lets you build your own AI agent — a helper that does jobs for you, like watching prices, trading or posting on X. You just tell it what you want in normal words.",['How do I start?','What can agents do?']];
   if(/start|begin|build|make|create|how do i/.test(q)&&!/buy/.test(q))return["Easy! Tap <b>Build my agent</b> at the top, pick a job, give it a name and you're done. Takes about a minute. Want me to take you there?",['Take me there']];
   if(/take me|go there|open builder/.test(q)){setTimeout(()=>{panel.classList.remove('open');$('#build').scrollIntoView({behavior:'smooth'})},400);return["Taking you there now 👇"]}
-  if(/what can|agents do|jobs|examples?/.test(q))return["Agents can:<br>📈 Trade crypto for you<br>🔔 Alert you when prices move<br>💰 Earn interest on your coins<br>📣 Post & reply on X<br>🛡️ Check if a coin looks like a scam<br>👑 Run your whole portfolio<br>🎯 Catch new coins early<br>💪 Guard your wallet",['How do I start?']];
+  if(/what can|agents do|jobs|examples?/.test(q))return["<b>Live now:</b> 🔍 Méndez checks any coin · 📈 Gato gives live prices · ✍️ Macca writes your X posts<br><br>Agents can:<br>📈 Trade crypto for you<br>🔔 Alert you when prices move<br>💰 Earn interest on your coins<br>📣 Post & reply on X<br>🛡️ Check if a coin looks like a scam<br>👑 Run your whole portfolio<br>🎯 Catch new coins early<br>💪 Guard your wallet",['How do I start?']];
   if(/safe|scam|risk|trust|lose/.test(q))return["You're always in control. Your agent only does what you allow, and you can pause or stop it anytime. If you're new, choose <b>Careful</b> mode and start small. Remember: crypto is risky, so only use money you can afford to lose.",['How do I start?']];
   if(/buy|purchase|get \$?gta6|phantom|wallet/.test(q))return["Here's how to buy $GTA6AGENT:<br>1️⃣ Download the free <b>Phantom</b> app<br>2️⃣ Buy some SOL inside Phantom with your card<br>3️⃣ Copy the $GTA6AGENT address on this page<br>4️⃣ Paste it in Phantom's swap screen and swap",['Show me the address']];
   if(/address|contract|\bca\b/.test(q)){setTimeout(()=>{panel.classList.remove('open');$('#token').scrollIntoView({behavior:'smooth'})},400);return[CONFIG.contractAddress==='COMING SOON'?"The address is coming soon — I'll take you to where it'll be 👇":"Taking you to it — tap the box to copy 👇"]}
@@ -913,6 +954,7 @@ function reply(t){const q=t.toLowerCase();
 }
 let lastText='';
 function ask(t,typed){
+  if(TALK&&LIVE[TALK.id]&&t===LIVE[TALK.id].label){LIVE[TALK.id].run(TALK);return}
   if(t==='Back to the guide'){TALK=null;HIST=[];setHead(null);addMsg("Back with the Vice City Guide 👋 Ask me anything.",'bot',['What is GTA6 Agent?','How do I start?']);return}
   if(t==='Put you to work'&&TALK){const c=TALK;panel.classList.remove('open');useChar(c);return}
   if(t==='Yes, set it up'){panel.classList.remove('open');startFromText(lastText);return}
@@ -924,14 +966,15 @@ function ask(t,typed){
   const scripted=()=>{typing.remove();const [a,qs]=TALK?charReply(TALK,t):reply(t);addMsg(a,'bot',qs)};
   if(!typed||AI_OFF){setTimeout(scripted,700);return}
   HIST.push({role:'user',content:t});HIST=HIST.slice(-12);
-  const c=TALK?{name:TALK.name,role:TALK.role,quote:TALK.quote,bio:TALK.bio,sig:TALK.sig,voice:TALK.voice,skills:TALK.skills,job:TALK.job}:null;
-  fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({character:c,messages:HIST,ticker:CONFIG.ticker,chain:CONFIG.chain,ca:CONFIG.contractAddress})})
-   .then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{if(!j.reply)throw 0;typing.remove();HIST.push({role:'assistant',content:j.reply});addMsg(fmt(j.reply),'bot')})
+  const _tool=PENDING_TOOL;
+  const c=TALK?{id:TALK.id,name:TALK.name,role:TALK.role,quote:TALK.quote,bio:TALK.bio,sig:TALK.sig,voice:TALK.voice,skills:TALK.skills,job:TALK.job}:null;
+  fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({character:c,messages:HIST,ticker:CONFIG.ticker,chain:CONFIG.chain,ca:CONFIG.contractAddress,links:{x:CONFIG.x,telegram:CONFIG.telegram},tool:PENDING_TOOL||''})})
+   .then(r=>{PENDING_TOOL='';if(!r.ok)throw 0;return r.json()}).then(j=>{if(!j.reply)throw 0;typing.remove();HIST.push({role:'assistant',content:j.reply});addMsg(fmt(j.reply),'bot')})
    .catch(()=>{AI_OFF=true;HIST.pop();scripted()});
 }
-let HIST=[],AI_OFF=location.protocol==='file:';
+let PENDING_TOOL='',HIST=[],AI_OFF=location.protocol==='file:';
 function fmt(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}
-$('#chatForm').onsubmit=e=>{e.preventDefault();const t=$('#chatInput').value.trim();if(!t)return;openChat();$('#chatInput').value='';ask(t,true)};
+$('#chatForm').onsubmit=e=>{e.preventDefault();primeSpeech();const t=$('#chatInput').value.trim();if(!t)return;openChat();$('#chatInput').value='';ask(t,true)};
 
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
