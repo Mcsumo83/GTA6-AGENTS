@@ -911,23 +911,24 @@ function addMsg(html,who,qs){const d=document.createElement('div');d.className='
 /* ===== VOICES ===== */
 const SYN=('speechSynthesis' in window)?window.speechSynthesis:null;let VOICE_ON=true,PRIMED=false;
 const VP={
- guide:{p:1.05,r:1.05,v:['Samantha','Google US English','Microsoft Aria','Ava','Allison','female']},
- lucia:{p:1.0,r:1.08,v:['Paulina','Monica','Samantha','Microsoft Jenny','Google US English','female']},
- jason:{p:0.9,r:0.98,v:['Alex','Aaron','Microsoft Guy','Google US English','Daniel','male']},
- mendez:{p:0.6,r:0.88,v:['Juan','Jorge','Diego','Fred','Microsoft Guy','Daniel','male']},
- macca:{p:1.45,r:1.18,v:['Daniel','Google UK English Male','Arthur','Gordon','male']},
- gato:{p:1.35,r:0.78,v:['Whisper','Moira','Samantha','female']},
- rocco:{p:1.25,r:1.15,v:['Karen','Google UK English Female','Samantha','female']},
- boobie:{p:0.45,r:0.88,v:['Aaron','Fred','Microsoft Guy','Alex','male']},
- raul:{p:0.75,r:0.92,v:['Jorge','Diego','Juan','Daniel','male']},
- bigguy:{p:0.3,r:0.8,v:['Fred','Ralph','Aaron','Microsoft Guy','male']}
+ guide:{p:1.05,r:1.0,v:['Samantha','Google US English','Microsoft Aria','Microsoft Jenny','Ava','Allison','Susan']},
+ lucia:{p:1.0,r:1.02,v:['Samantha','Ava','Microsoft Jenny','Google US English','Allison','Susan','Karen']},
+ jason:{p:0.95,r:0.98,v:['Aaron','Microsoft Guy','Google UK English Male','Daniel','Tom','Evan']},
+ mendez:{p:0.8,r:0.92,v:['Aaron','Microsoft Guy','Daniel','Google UK English Male','Tom','Evan']},
+ macca:{p:1.15,r:1.1,v:['Daniel','Google UK English Male','Arthur','Oliver','Aaron','Microsoft Guy']},
+ gato:{p:1.0,r:0.9,v:['Moira','Tessa','Karen','Samantha','Google UK English Female','Microsoft Sonia']},
+ rocco:{p:1.1,r:1.06,v:['Karen','Google UK English Female','Tessa','Samantha','Microsoft Sonia']},
+ boobie:{p:0.8,r:0.92,v:['Aaron','Microsoft Guy','Evan','Tom','Daniel','Google UK English Male']},
+ raul:{p:0.85,r:0.95,v:['Daniel','Google UK English Male','Aaron','Microsoft Guy','Tom']},
+ bigguy:{p:0.7,r:0.88,v:['Aaron','Microsoft Guy','Tom','Evan','Daniel','Google UK English Male']}
 };
-function pickVoice(pref){const all=SYN.getVoices();const en=all.filter(v=>/^en/i.test(v.lang));
- for(const n of pref){const v=all.find(v=>v.name.toLowerCase().includes(n.toLowerCase())&&(/^(en|es)/i.test(v.lang)));if(v)return v}
- return en.find(v=>v.default)||en[0]||null}
+const NOVELTY=/albert|bad news|bahh|bells|boing|bubbles|cellos|deranged|fred|good news|hysterical|jester|junior|kathy|organ|princess|ralph|superstar|trinoids|whisper|wobble|zarvox|grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley/i;
+function pickVoice(pref){const en=SYN.getVoices().filter(v=>/^en[-_]/i.test(v.lang)&&!NOVELTY.test(v.name));
+ for(const n of pref){const v=en.find(v=>v.name.toLowerCase().includes(n.toLowerCase()));if(v)return v}
+ return en.find(v=>v.default)||en.find(v=>/en[-_](US|GB)/i.test(v.lang))||en[0]||null}
 function speak(text,c){if(!SYN)return;SYN.cancel();const p=VP[c&&c.id]||VP.guide;
  const clean=text.replace(/🔊 Play/g,'').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').replace(/[•★…]/g,' ').replace(/\s+/g,' ').trim();if(!clean)return;
- const u=new SpeechSynthesisUtterance(clean);const v=pickVoice(p.v);if(v){u.voice=v;u.lang=v.lang}u.pitch=p.p;u.rate=p.r;SYN.speak(u)}
+ const u=new SpeechSynthesisUtterance(clean);const v=pickVoice(p.v);if(v){u.voice=v;u.lang=v.lang}else{u.lang='en-US'}u.pitch=p.p;u.rate=p.r;SYN.speak(u)}
 function primeSpeech(){if(SYN&&!PRIMED){PRIMED=true;try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;SYN.speak(u)}catch(e){}}}
 if(SYN){SYN.getVoices();SYN.onvoiceschanged=()=>SYN.getVoices()}
 function openChat(){panel.classList.add('open');if(!greeted){greeted=true;addMsg("Hi! 👋 I'm your Vice City Guide. Ask me anything — no question is too simple.",'bot',['What is GTA6 Agent?','How do I start?','Is it safe?','How do I buy $GTA6AGENT?'])}}
