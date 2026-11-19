@@ -433,6 +433,98 @@ footer{color:var(--soft);border-top:1px solid rgba(255,46,136,.2)}
 .ag-src{margin-top:6px;font-size:12px;opacity:.85}.ag-src a{color:#22b8ff;font-weight:700;text-decoration:none}
 .ag-post{margin:8px 0;padding:8px;border-radius:10px;background:rgba(255,255,255,.08)}
 </style>
+<style>
+/* ===== CREW STUDIO ===== */
+.sx-h{display:none!important}
+#studio .sx{margin-top:30px;background:linear-gradient(160deg,#1a0f33,#2b0f50);border:1px solid rgba(255,46,136,.3);box-shadow:0 0 50px rgba(255,46,136,.12);border-radius:30px;padding:26px;color:#fff}
+@media(max-width:560px){#studio .sx{padding:18px;border-radius:24px}}
+.sx-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px}
+.sx-cred{background:rgba(255,210,63,.14);border:1px solid rgba(255,210,63,.45);color:var(--yellow);border-radius:999px;padding:9px 16px;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit}
+.sx-who{color:var(--soft);font-size:14px;font-weight:600;margin-right:auto}
+.sx-link{background:none;border:0;color:var(--soft);text-decoration:underline;cursor:pointer;font-size:13px;font-family:inherit}
+.sx-lbl{font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin:16px 0 8px}
+.sx-crew{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.sx-crew::-webkit-scrollbar{display:none}
+.sx-crew button{flex:0 0 auto;width:78px;background:none;border:0;color:#fff;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;text-align:center;opacity:.65;transition:.2s}
+.sx-crew button img{width:66px;height:66px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid transparent;display:block;margin:0 auto 4px;background:var(--night3)}
+.sx-crew button.on{opacity:1}
+.sx-crew button.on img{border-color:var(--c);box-shadow:0 0 18px color-mix(in srgb,var(--c) 60%,transparent)}
+.sx-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:600px){.sx-tabs{grid-template-columns:repeat(2,1fr)}}
+.sx-tabs button,.sx-seg button,.sx-coins button{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);color:#fff;border-radius:14px;padding:12px 8px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
+.sx-tabs button.on,.sx-seg button.on,.sx-coins button.on{background:linear-gradient(90deg,var(--pink),var(--orange));border-color:transparent}
+.sx-comp{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px}
+.sx-photo{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sx-add{background:rgba(34,228,255,.12);border:1.5px dashed var(--cyan);color:var(--cyan);border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14px}
+.sx-thumb{position:relative;width:64px;height:64px}
+.sx-thumb img{width:64px;height:64px;object-fit:cover;border-radius:12px}
+.sx-thumb button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:0;background:var(--pink);color:#fff;font-size:11px;cursor:pointer}
+#sxPrompt{width:100%;background:transparent;border:0;outline:0;color:#fff;font:inherit;font-size:16px;resize:none;min-height:70px}
+#sxPrompt::placeholder{color:rgba(205,187,233,.6)}
+.sx-sugs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.sx-sugs button{background:transparent;border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.sx-opts{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
+.sx-seg{display:flex;gap:6px}
+.sx-seg button{padding:8px 12px;font-size:13px;border-radius:999px}
+.sx-tg{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--soft);cursor:pointer}
+.sx-tg input{accent-color:var(--pink);width:18px;height:18px}
+.sx-go{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:12px}
+.sx-go span{color:var(--yellow);font-weight:800;font-size:14px}
+.sx-go .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.sx-note{color:var(--soft);font-size:12px;text-align:right;margin-top:6px}
+.sx-feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}
+.sx-feed:empty{display:none}
+.sx-card{background:var(--night);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:20px;padding:12px;box-shadow:0 0 24px color-mix(in srgb,var(--c) 18%,transparent)}
+.sx-ch{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sx-ch img{width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--c)}
+.sx-ch b{display:block;font-size:15px}.sx-ch small{color:var(--soft);font-size:12px}
+.sx-p{color:var(--soft);font-size:13px;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sx-m{border-radius:14px;overflow:hidden;background:var(--night3);min-height:120px;display:flex;align-items:center;justify-content:center}
+.sx-m img,.sx-m video{width:100%;display:block}
+.sx-m audio,.sx-media audio{width:100%}
+.sx-m.music{min-height:0;padding:14px;background:linear-gradient(135deg,rgba(255,46,136,.25),rgba(34,228,255,.18))}
+.sx-load{padding:22px 16px;text-align:center;font-size:13px;color:var(--soft);width:100%}
+.sx-pb{height:6px;border-radius:9px;background:rgba(255,255,255,.1);margin-top:12px;overflow:hidden}
+.sx-pb i{display:block;height:100%;width:4%;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .8s}
+.sx-ac{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.sx-ac button{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:999px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+.sx-ac button.hot{background:linear-gradient(90deg,var(--pink),var(--orange));border:0}
+.sx-mine{margin-top:18px;border-top:1px solid rgba(255,255,255,.1);padding-top:12px}
+.sx-mine summary{cursor:pointer;font-weight:700;color:var(--soft)}
+#sxHist{display:flex;flex-direction:column;gap:4px;margin-top:8px;max-height:260px;overflow:auto}
+#sxHist button{text-align:left;background:rgba(255,255,255,.05);border:0;color:#fff;border-radius:10px;padding:9px 12px;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sxHist .none{color:var(--soft);font-size:13px;padding:6px}
+/* media inside agent chats */
+.sx-media{margin:8px 0;border-radius:14px;overflow:hidden}
+.sx-media img,.sx-media video{width:100%;display:block;border-radius:14px}
+.msg .sx-ac button{flex:0 0 auto}
+/* modals */
+.sx-modal{position:fixed;inset:0;background:rgba(5,2,15,.75);display:none;align-items:center;justify-content:center;z-index:300;padding:16px}
+.sx-modal.on{display:flex}
+.sx-box{background:#150c2b;border:1px solid rgba(255,46,136,.4);border-radius:24px;padding:24px;max-width:430px;width:100%;max-height:92vh;overflow:auto;color:#fff;position:relative}
+.sx-box h3{font-size:26px;margin-bottom:6px}
+.sx-box p{color:var(--soft);font-size:14px;margin-bottom:12px}
+.sx-x{position:absolute;top:12px;right:14px;background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
+.sx-box .btn{width:100%}
+.sx-msg{font-size:14px;margin-top:10px;color:var(--soft)}
+.sx-msg .err{color:#ff7a9c}.sx-msg .ok{color:#34d399;font-weight:700}
+.sx-coins{display:grid;gap:8px;margin-bottom:12px}
+.sx-pack{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.15);color:#fff;border-radius:16px;padding:14px;margin-bottom:8px;cursor:pointer;text-align:left;font-family:inherit}
+.sx-pack b{font-size:16px}.sx-pack small{display:block;color:var(--soft);font-size:12px}
+.sx-pack .pr{font-weight:900;font-size:20px;color:var(--yellow)}
+.sx-pack .best{background:var(--pink);color:#fff;font-size:10px;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.sx-amt{font-size:28px;font-weight:900;color:var(--yellow)}
+.sx-row{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:12px;padding:10px 12px;margin:6px 0;font-size:13px;word-break:break-all}
+.sx-row code{flex:1}
+.sx-row button{flex:0 0 auto;background:var(--cyan);color:var(--night);border:0;border-radius:999px;padding:6px 12px;font-weight:800;cursor:pointer;font-family:inherit}
+#sxQr{display:flex;justify-content:center;margin:10px 0}
+#sxQr img,#sxQr canvas{background:#fff;padding:8px;border-radius:12px}
+.sx-spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:var(--cyan);border-radius:50%;animation:sxs 1s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes sxs{to{transform:rotate(360deg)}}
+</style>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>window.supabase || document.write('<script crossorigin="anonymous" src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"><\/script>')</script>
+<script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 </head>
 <body>
 
@@ -448,12 +540,31 @@ const CONFIG = {
   dexscreener: "https://dexscreener.com/solana/"
 };
 </script>
+<script>
+/* ======================= CREW STUDIO SETTINGS =======================
+   Videos, music & images run on your Pokerface backend (Supabase + fal.ai).
+   Same credits, same wallet login, payments go to the same wallet.
+   Keep these the same as the CONFIG in your Pokerface index.html.
+   ==================================================================== */
+const STUDIO_CFG = {
+  supabaseUrl:     "https://gguqljrklzflqhybedac.supabase.co",
+  supabaseAnonKey: "sb_publishable_BLqNWmM9o3rmTYSqZuXWWg_uZTlMZ3W",
+  functionName:    "creator-api",          // images, text-to-video, music, USDC/SOL payments
+  videoFunction:   "Pokerface---video-",   // photo-to-video
+  freeCredits:     10,
+  packs: [ { credits: 100, usd: 5 }, { credits: 250, usd: 10, best: true }, { credits: 750, usd: 25 } ],  // must match creator-api
+  costs: { image: 1, music: 8 },
+  videoLengths: [ { seconds: 5, cost: 15 }, { seconds: 10, cost: 20 } ],
+  photoLengths: [5, 10, 15]
+};
+</script>
 
 <nav>
   <div class="wrap nav-in">
     <a href="#" class="logo"><img class="logo-img" src="data:image/jpeg;base64,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" alt="Grand Theft Agent"></a>
     <div class="nav-r">
       <a href="#crew" class="nav-link">Agents</a>
+      <a href="#studio" class="nav-link">Studio</a>
       <a href="#how" class="nav-link">How it works</a>
       <a href="#token" class="nav-link">Token</a>
       <a href="#build" class="btn btn-navy btn-sm">Build my agent</a>
@@ -480,9 +591,10 @@ const CONFIG = {
         <span class="idea" data-c="mendez">🔍 Scan a coin</span>
         <span class="idea" data-c="gato">🔔 Price alarm</span><span class="idea" data-c="lucia">📈 Trade plan</span><span class="idea" data-c="raul">🎯 New coins</span>
         <span class="idea" data-c="macca">✍️ Write my X posts</span>
+        <span class="idea" data-c="studio">🎨 Make a pic, video or song</span>
         <span class="idea" data-c="talk">💬 Ask anything</span>
       </div>
-      <div class="trust"><span>✅ Free to try</span><span>🔐 Never asks for your wallet</span><span>🗣️ Real AI + voice</span></div>
+      <div class="trust"><span>✅ Free to try</span><span>🔐 Never asks for your seed phrase</span><span>🗣️ Real AI + voice</span></div>
     </div>
     <a href="#crew" class="round" id="round" aria-label="Meet the crew"><div class="rc" id="rc"></div><div class="rcap" id="rcap"></div><span class="live">9 agents online</span></a>
   </div>
@@ -522,6 +634,48 @@ const CONFIG = {
 </section>
 
 <!-- BUILDER -->
+
+<!-- CREW STUDIO — videos, music & images -->
+<section id="studio" style="padding-top:20px">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="pill">New · Crew Studio</span>
+      <h2>The crew makes <span class="hl">videos, music &amp; pics</span></h2>
+      <p class="sub">Pick an agent, say what you want and they’ll make it. You can also just ask any agent in the chat, e.g. “make me a song about Vice City”. New here? Connect a wallet and get <b class="sx-free">10</b> free credits.</p>
+    </div>
+    <div class="sx reveal">
+      <div class="sx-bar">
+        <button class="sx-cred" id="sxCredBtn">🪙 <b class="sx-cred-n">0</b> credits</button>
+        <span class="sx-who" id="sxWho">Not connected</span>
+        <button class="btn btn-mint btn-sm" id="sxConnect">Connect wallet</button>
+        <button class="btn btn-light btn-sm" id="sxBuy">+ Buy credits</button>
+        <button class="sx-link sx-h" id="sxOut">Disconnect</button>
+      </div>
+      <div class="sx-lbl">1 · Pick your agent</div>
+      <div class="sx-crew" id="sxCrew"></div>
+      <div class="sx-lbl">2 · What are we making?</div>
+      <div class="sx-tabs" id="sxTabs">
+        <button data-k="image">🖼️ Image</button><button data-k="video">🎥 Video</button><button data-k="photo">🎬 Animate a photo</button><button data-k="music">🎵 Music</button>
+      </div>
+      <div class="sx-lbl">3 · Describe it</div>
+      <div class="sx-comp">
+        <div class="sx-photo" id="sxPhoto"><button class="sx-add" id="sxAttach" type="button">📷 Add your photo</button><div id="sxThumb"></div><input type="file" id="sxFile" accept="image/png,image/jpeg,image/webp" hidden></div>
+        <textarea id="sxPrompt" rows="3"></textarea>
+        <div class="sx-sugs" id="sxSugs"></div>
+        <div class="sx-opts">
+          <div class="sx-seg" id="sxLen"></div>
+          <label class="sx-tg" id="sxSoundW"><input type="checkbox" id="sxSound"> 🔊 Add sound</label>
+          <label class="sx-tg"><input type="checkbox" id="sxVice" checked> 🌴 Vice City look</label>
+        </div>
+        <div class="sx-go"><span id="sxCost">1 credit</span><button class="btn btn-navy" id="sxGo" type="button">Make it ✨</button></div>
+        <div class="sx-note" id="sxNote"></div>
+      </div>
+      <div class="sx-feed" id="sxFeed"></div>
+      <details class="sx-mine"><summary>📁 Your creations</summary><div id="sxHist"></div></details>
+    </div>
+  </div>
+</section>
+
 <section id="build" style="padding-top:20px">
   <div class="wrap">
     <div class="center reveal">
@@ -667,6 +821,45 @@ const CONFIG = {
   </div>
 </form>
 
+
+<!-- STUDIO: connect wallet -->
+<div class="sx-modal" id="sxAuth"><div class="sx-box">
+  <button class="sx-x" data-sxclose>✕</button>
+  <h3>Connect your wallet</h3>
+  <p>Your Solana wallet is your account — your credits and creations are saved to it. Connecting is free and sends no transaction. New wallets get <b class="sx-free">10</b> free credits.</p>
+  <button class="btn btn-navy" id="sxPhantomIn" type="button">Connect Phantom</button>
+  <div class="sx-msg" id="sxWalletHint"></div>
+  <div class="sx-msg" id="sxAuthMsg"></div>
+</div></div>
+
+<!-- STUDIO: buy credits -->
+<div class="sx-modal" id="sxBuyM"><div class="sx-box">
+  <button class="sx-x" data-sxclose>✕</button>
+  <h3>Top up credits</h3>
+  <p id="sxRate">No subscription — top up only when you need to.</p>
+  <div class="sx-coins" id="sxCoins"></div>
+  <div id="sxPacks"></div>
+  <p style="font-size:12px;margin:6px 0 0">Your credits also work on Pokerface with the same wallet.</p>
+</div></div>
+
+<!-- STUDIO: pay -->
+<div class="sx-modal" id="sxPay"><div class="sx-box">
+  <button class="sx-x" data-sxclose>✕</button>
+  <h3 id="sxPayTitle">Pay with USDC</h3>
+  <div class="sx-amt" id="sxPayAmt"></div>
+  <p id="sxPayFor"></p>
+  <div id="sxOpt1"><button class="btn btn-navy" id="sxPayPh" type="button">Pay with Phantom</button><p style="text-align:center;margin:10px 0 4px;font-size:12px">— or send it yourself —</p></div>
+  <div id="sxManual">
+    <p style="margin:0;font-size:13px">Send <b>exactly</b> this amount (don’t let an exchange take its fee off it — the exact amount is how we find your payment):</p>
+    <div class="sx-row"><code id="sxPayAmtCopy"></code><button data-sxcopy="sxPayAmtCopy">Copy</button></div>
+    <p style="margin:6px 0 0;font-size:13px">To this wallet:</p>
+    <div class="sx-row"><code id="sxPayWallet"></code><button data-sxcopy="sxPayWallet">Copy</button></div>
+    <div id="sxQr"></div>
+    <p id="sxPayNote" style="font-size:12px"></p>
+  </div>
+  <div class="sx-msg" id="sxPayStatus"></div>
+</div></div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -743,7 +936,7 @@ function startFromText(t){
 $('#heroAsk').onsubmit=e=>{e.preventDefault();primeSpeech();const t=$('#heroInput').value.trim();if(!t){$('#heroInput').focus();return}$('#heroInput').value='';
  const isAddr=/\b([1-9A-HJ-NP-Za-km-z]{32,44}|0x[a-fA-F0-9]{40})\b/.test(t);
  if(isAddr){const c=CREW.find(x=>x.id==='mendez');talkTo(c);setTimeout(()=>ask(t,true),400)}else{openChat();ask(t,true)}};
-$$('#heroIdeas .idea').forEach(i=>i.onclick=()=>{primeSpeech();const id=i.dataset.c;if(id==='talk'){openChat();setTimeout(()=>$('#chatInput').focus(),200);return}
+$$('#heroIdeas .idea').forEach(i=>i.onclick=()=>{primeSpeech();const id=i.dataset.c;if(id==='talk'){openChat();setTimeout(()=>$('#chatInput').focus(),200);return}if(id==='studio'){STUDIO.open(null,'image');return}
  const c=CREW.find(x=>x.id===id);if(c&&LIVE[id])LIVE[id].run(c)});
 
 
@@ -877,11 +1070,12 @@ function showProfile(i){
   <div class="bars">${Object.entries(c.stats).map(([k,v])=>`<div class="bar">${k}<div><i style="width:${v}%"></i></div></div>`).join('')}</div>
   <div class="skills">${c.skills.map(s=>`<span>${s}</span>`).join('')}</div>
   ${LIVE[c.id]?`<div class="livetag"><b>● LIVE</b> ${LIVE[c.id].live}</div>`:''}
-  <div class="pbtns">${LIVE[c.id]?`<button class="btn pbtn" id="toolChar">${LIVE[c.id].label}</button>`:''}<button class="btn ${LIVE[c.id]?'btn-light':'pbtn'}" id="useChar">Put ${c.name} to work →</button><button class="btn btn-light" id="talkChar">💬 Talk to ${c.name}</button></div></div>`;
+  <div class="pbtns">${LIVE[c.id]?`<button class="btn pbtn" id="toolChar">${LIVE[c.id].label}</button>`:''}<button class="btn ${LIVE[c.id]?'btn-light':'pbtn'}" id="useChar">Put ${c.name} to work →</button><button class="btn btn-light" id="talkChar">💬 Talk to ${c.name}</button><button class="btn btn-light" id="makeChar">🎨 Create with ${c.name}</button></div></div>`;
  p.style.setProperty('--c',c.c);p.style.setProperty('--c2',c.c2);
  p.classList.add('show');
  $('#useChar').onclick=()=>useChar(c);
  $('#talkChar').onclick=()=>talkTo(c);
+ $('#makeChar').onclick=()=>STUDIO.open(c,'image');
  if(LIVE[c.id])$('#toolChar').onclick=()=>{primeSpeech();LIVE[c.id].run(c)};
  if(innerWidth<860)p.scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -913,6 +1107,7 @@ renderCrew();
 /* ===== FAQ ===== */
 const faqs=[
  ['What is GTA6 Agent?','A fan-made site with 9 working AI agents inspired by GTA VI. You give a job in plain words — the agent plans it, does it with live data and hands you the finished result. They even talk back out loud.'],
+ ['Can the agents make videos, music and pictures?','Yes — every agent can. Ask in the chat (e.g. “make me a song about Vice City”) or use the Crew Studio: pick an agent, choose image, video, animate-a-photo or music, and describe it. It uses credits — connect a Phantom wallet for 10 free, then top up with USDC or SOL. Your credits also work on Pokerface.'],
  ['What can the agents actually do?','Lucia: trade plans for any coin. Jason: best Solana yields. Méndez: full scam checks (liquidity, mint & freeze, holders). Macca: X posts with one-tap posting. Gato: live prices and price alarms. Rocco: research & answers. Boobie Ike: portfolio planner. Raul: new-coin scanner. Big Guy: link and wallet checks.'],
  ['Do they trade or move my money?','No. Agents never connect to your wallet. They give you the plan, the verdict or the post plus the link — you make the move yourself. Auto-trading is coming later.'],
  ['Do I need to connect my wallet?','No. Nothing on the site connects to or touches your wallet. Never share your seed phrase or private key with anyone — we will never ask for it.'],
@@ -990,7 +1185,7 @@ function speak(text,c){if(!SYN)return;SYN.cancel();const id=(c&&c.id&&VP[c.id])?
   if(v){u.voice=v}u.lang='en-US';u.pitch=pitch;u.rate=p.r;SYN.speak(u)})}
 function primeSpeech(){if(SYN&&!PRIMED){PRIMED=true;try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;SYN.speak(u)}catch(e){}}}
 if(SYN){buildVoices();SYN.onvoiceschanged=buildVoices}
-function openChat(){panel.classList.add('open');if(!greeted){greeted=true;addMsg("Hi! 👋 I'm your Vice City Guide. Give the crew a job — or ask me anything.",'bot',['🔍 Check a coin','📈 Prices & alerts','✍️ Write my X posts','What can agents do?'])}}
+function openChat(){panel.classList.add('open');if(!greeted){greeted=true;addMsg("Hi! 👋 I'm your Vice City Guide. Give the crew a job — or ask me anything.",'bot',['🔍 Check a coin','📈 Prices & alerts','✍️ Write my X posts','🎨 Make a pic, video or song','What can agents do?'])}}
 $('#closeChat').onclick=()=>{panel.classList.remove('open');if(SYN)SYN.cancel()};
 if(!('speechSynthesis' in window))$('#voiceBtn').style.display='none';
 $('#voiceBtn').onclick=()=>{VOICE_ON=!VOICE_ON;$('#voiceBtn').textContent=VOICE_ON?'🔊':'🔇';if(!VOICE_ON&&SYN)SYN.cancel();else primeSpeech()};
@@ -1001,11 +1196,11 @@ function reply(t){const q=t.toLowerCase();
   if(/what.*(sumo|gta6|agent|this site)|what is this|what do you do/.test(q))return["GTA6 Agent is a fan-made site with 9 working AI agents inspired by GTA VI. Ask once — they plan the job, do it with live data and hand you the result.",['What can agents do?','🔍 Check a coin']];
   if(/start|begin|build|make|create|how do i/.test(q)&&!/buy/.test(q))return["Easy! Tap <b>Build my agent</b> at the top, pick a job, give it a name and you're done. Takes about a minute. Want me to take you there?",['Take me there']];
   if(/take me|go there|open builder/.test(q)){setTimeout(()=>{panel.classList.remove('open');$('#build').scrollIntoView({behavior:'smooth'})},400);return["Taking you there now 👇"]}
-  if(/what can|agents do|jobs|examples?/.test(q))return["<b>All 9 are working agents:</b><br>📈 Lucia — trade plans for any coin<br>💰 Jason — best Solana yields<br>🔍 Méndez — full scam checks<br>✍️ Macca — X posts, one-tap post<br>🔔 Gato — live prices & price alarms<br>🐾 Rocco — answers & research<br>👑 Boobie Ike — portfolio planner<br>🎯 Raul — new-coin scanner<br>💪 Big Guy — link & wallet checks<br><br>Just type the job, e.g. “alert me if SOL moves 5%”.",['📈 Make a trade plan','🎯 Scout new coins','💪 Check a link or wallet']];
+  if(/what can|agents do|jobs|examples?/.test(q))return["<b>All 9 are working agents:</b><br>📈 Lucia — trade plans for any coin<br>💰 Jason — best Solana yields<br>🔍 Méndez — full scam checks<br>✍️ Macca — X posts, one-tap post<br>🔔 Gato — live prices & price alarms<br>🐾 Rocco — answers & research<br>👑 Boobie Ike — portfolio planner<br>🎯 Raul — new-coin scanner<br>💪 Big Guy — link & wallet checks<br>🎨 <b>Every agent</b> — images, videos & songs<br><br>Just type the job, e.g. “alert me if SOL moves 5%”.",['📈 Make a trade plan','🎯 Scout new coins','💪 Check a link or wallet']];
   if(/safe|scam|risk|trust|lose/.test(q))return["Nothing on this site touches your wallet, and we’ll never ask for your seed phrase. Crypto is risky — only use money you can afford to lose, and do your own research.",['How do I start?']];
   if(/buy|purchase|get \$?gta6|phantom|wallet/.test(q))return["Here's how to buy $GTA6AGENT:<br>1️⃣ Download the free <b>Phantom</b> app<br>2️⃣ Buy some SOL inside Phantom with your card<br>3️⃣ Copy the $GTA6AGENT address on this page<br>4️⃣ Paste it in Phantom's swap screen and swap",['Show me the address']];
   if(/address|contract|\bca\b/.test(q)){setTimeout(()=>{panel.classList.remove('open');$('#token').scrollIntoView({behavior:'smooth'})},400);return[CONFIG.contractAddress==='COMING SOON'?"The address is coming soon — I'll take you to where it'll be 👇":"Taking you to it — tap the box to copy 👇"]}
-  if(/cost|price|free|pay|fee/.test(q))return["The site and its live tools are free to use."];
+  if(/cost|price|free|pay|fee|credit/.test(q))return["The agents’ live tools are free. Making images, videos and songs uses credits — connect a wallet for 10 free, then top up with USDC or SOL.",['🎨 Make a pic, video or song']];
   if(/agent\b|ai agent|what is an/.test(q))return["An AI agent is like a smart assistant that doesn't just chat — it actually does the job for you, step by step, and tells you what it did. 🤖"];
   if(/x\b|twitter|telegram|community|social/.test(q))return[`Join us here: <a href="${CONFIG.x}" target="_blank" style="color:#7f6bf8;font-weight:700">X</a> · <a href="${CONFIG.telegram}" target="_blank" style="color:#7f6bf8;font-weight:700">Telegram</a>`];
   if(/lucia|jason|mendez|méndez|macca|gator|gato|rocco|dog|k9|boobie|ike|boss|raul|big guy|bodyguard|guard|character|gta|crew/.test(q)){setTimeout(()=>{panel.classList.remove('open');$('#crew').scrollIntoView({behavior:'smooth'})},400);return["Meet the crew 👇 Lucia is our Bold Trader, Jason is our Steady Earner, Méndez sniffs out scams and Macca hypes your X, Gato watches prices 24/7 Rocco is your loyal all-rounder Boobie Ike runs the whole operation Raul snipes new coins early and Big Guy guards your wallet."]}
@@ -1016,18 +1211,20 @@ function reply(t){const q=t.toLowerCase();
 let lastText='';
 const NAV_CHIPS=['Back to the guide','Put you to work','Yes, set it up','Ask something else','Show me the address','Take me there','How do I start?','Is it safe?','How do I buy $GTA6AGENT?','What is GTA6 Agent?','What can agents do?','What can you do?'];
 /* quick-reply buttons that match what each character can ACTUALLY do right now */
-function chipsFor(c){if(!c)return['🔍 Check a coin','📈 Prices & alerts','✍️ Write my X posts','What can agents do?'];
- return[(typeof AG!=='undefined'&&AG[c.id])?AG[c.id].label:'What can you do?','What can you do?','Back to the guide']}
+function chipsFor(c){if(!c)return['🔍 Check a coin','📈 Prices & alerts','✍️ Write my X posts','🎨 Make a pic, video or song','What can agents do?'];
+ return[(typeof AG!=='undefined'&&AG[c.id])?AG[c.id].label:'What can you do?','🎨 Make a pic, video or song','What can you do?','Back to the guide']}
 const ADDR_RE=/\b([1-9A-HJ-NP-Za-km-z]{32,44}|0x[a-fA-F0-9]{40})\b/;
 /* What every character may offer. Sent to the AI so nobody promises a job they can't do. */
 const RULES='IMPORTANT RULES FOR THIS CHAT: The crew are working agents on this site. The jobs that really work (the user taps the button or just asks): '+
  'Lucia makes a trade plan for any coin from the live chart; Jason finds the best Solana yields; Méndez does a full scam check on any coin; Macca writes 3 X posts with a one-tap Post on X button; '+
  'Gato gives live prices for any coin and sets a price alarm while the page is open; Rocco researches any question; Boobie Ike values a portfolio and says what to move; Raul scans brand-new Solana launches and safety-checks them; Big Guy checks links for scam tricks and scans Solana wallets for junk tokens. '+
+ 'Every crew member can ALSO MAKE images, videos (5 or 10 sec, or animate the user\'s own photo) and songs with AI — the user just asks (e.g. "make me an image of…"), taps 🎨 Make a pic, video or song, or uses the Crew Studio section on the page. It uses credits: new wallets get 10 free, then top up with USDC or SOL. '+
  'Agents NEVER place trades, move money, connect wallets or post on the user\'s behalf — they hand over the plan and the links and the user acts. For any other question at all (football, news, weather, general knowledge), just answer it — search the web if it needs current info. If a crew member’s job fits better, mention them. Never ask for a seed phrase or private key.';
 let AI_FAILS=0,AI_RETRY_AT=0;
 function aiAvailable(){return location.protocol!=='file:'&&(AI_FAILS<2||Date.now()>AI_RETRY_AT)}
 function ask(t,typed){
   if(CHIP_ALIAS[t]){t=CHIP_ALIAS[t];typed=true}
+  if(typeof STUDIO!=='undefined'){if(STUDIO.chip(t))return;if(typed&&!NAV_CHIPS.includes(t)&&!JOB_CHIPS[t]){const k=STUDIO.detect(t);if(k){AWAIT=null;addMsg(esc(t),'me');STUDIO.chat(k,t);return}}}
   if(TALK&&LIVE[TALK.id]&&t===LIVE[TALK.id].label){AWAIT=null;startJob(TALK);return}
   if(JOB_CHIPS[t]){AWAIT=null;const c=CREW.find(x=>x.id===JOB_CHIPS[t]);if(TALK&&TALK.id===c.id){startJob(c,/Alert me/.test(t)?t:'');return}
    addMsg(`Passing you to <b>${c.name}</b> — that’s his job 👇`.replace('his job',c.id==='lucia'?'her job':'his job'),'bot');setTimeout(()=>startJob(c,/Alert me/.test(t)?t:''),700);return}
@@ -1079,7 +1276,7 @@ function toolCoin(t,c){const a=(t.match(ADDR_RE)||[])[1];if(!a)return Promise.re
 function toolPosts(c){const tk=CONFIG.ticker||'$GTA6AGENT',x=[
  `🌴 Vice City just got smarter. ${tk} — 9 AI agents, one crew, zero jargon. Pick your character and start chatting 👇`,
  `Lucia trades. Méndez sniffs out scams. Gato never sleeps. 👀 Who’s on YOUR crew? ${tk} 🎮`,
- `No code. No wallet connect. Just pick an agent and ask anything. ${tk} is the easiest way into AI agents 🔥`,
+ `No code. No jargon. Just pick an agent and ask anything. ${tk} is the easiest way into AI agents 🔥`,
  `Paste any contract address and Méndez tells you if it’s Clean, Sus or Crooked 🚨 Free. ${tk}`,
  `GM Leonida ☀️ Live prices from Gato, scam checks from Méndez, posts from Macca. The crew is working. ${tk}`];
  const pick=x.sort(()=>Math.random()-.5).slice(0,3);
@@ -1349,6 +1546,7 @@ const REAL={
  bigguy:{bio:'Big Guy doesn’t talk much — he doesn’t need to. Paste a link and he spots scam tricks; paste a Solana wallet and he scans it for spam and junk tokens.',now:['Checks any link for scam tricks','Scans Solana wallets for junk','Read-only — nothing connects'],soon:['Blocking approvals in your wallet'],skills:['Link checks','Wallet scan','Spam token finder','Lookalike sites']}
 };
 CREW.forEach(c=>{if(REAL[c.id])Object.assign(c,REAL[c.id])});
+CREW.forEach(c=>{if(c.now&&!c.now.includes('Makes images, videos & songs'))c.now=c.now.concat(['Makes images, videos & songs'])});
 /* swap the old 3-tool LIVE list for all 9 agents */
 Object.keys(LIVE).forEach(k=>delete LIVE[k]);
 Object.entries(AG).forEach(([id,a])=>LIVE[id]={label:a.label,live:a.live,run:c=>startJob(c)});
@@ -1357,6 +1555,348 @@ renderCrew();
 /* reveal */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 $$('.reveal').forEach(el=>io.observe(el));
+</script>
+
+<script>
+/* ===================================================================
+   CREW STUDIO — every agent can make images, videos & songs.
+   Runs on the Pokerface backend: same credits, same wallet, same payments.
+   =================================================================== */
+const STUDIO=(()=>{
+const C=STUDIO_CFG;
+const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent),inWalletApp=/Phantom|Solflare/i.test(navigator.userAgent);
+const E=s=>esc(String(s==null?'':s));
+const LIVEC=CREW.filter(c=>!c.locked);
+const GUIDE={id:'guide',name:'Vice City Guide',img:'',c:'#22e4ff',voice:['On it.','Coming right up.']};
+const KINDS={
+ image:{icon:'🖼️',title:'Image',chip:'🖼️ Make an image',ph:'Describe the picture you want…',wait:'a few seconds',ext:'png',vice:', vibrant Vice City style, neon sunset colours, palm trees, cinematic lighting'},
+ video:{icon:'🎥',title:'Video',chip:'🎥 Make a video',ph:'Describe the video you want…',wait:'about 1–3 minutes',ext:'mp4',vice:', Vice City style, neon sunset colours, palm trees, cinematic'},
+ photo:{icon:'🎬',title:'Photo video',chip:'🎬 Animate my photo',ph:'Add a photo, then say how it should move…',wait:'about 1–3 minutes',ext:'mp4',vice:', neon Vice City lighting'},
+ music:{icon:'🎵',title:'Song',chip:'🎵 Make a song',ph:'Describe the song — style, mood, what it’s about…',wait:'about a minute',ext:'mp3',vice:', 80s Miami synthwave vibe'}
+};
+const SUGS={
+ image:[['🌴 Vice City sunset','A neon-lit beach at sunset with palm trees and a pink sports car'],['🐊 Gator DJ','A cartoon alligator DJ at a Miami beach party, bold colours'],['🪙 Coin logo','A bold, clean logo for a crypto coin called '+CONFIG.ticker]],
+ video:[['🏎️ Night drive','A pink sports car speeding down a neon highway at night, cinematic'],['🌊 Beach drone','Drone shot over a busy Miami-style beach at sunset'],['🚁 Chopper chase','A police helicopter chasing a speedboat through a neon harbour at night']],
+ photo:[['😉 Wink & wave','The person smiles, winks and waves at the camera'],['🌀 Spin around','Camera circles slowly around the subject, epic lighting'],['💥 Action scene','Turns into a dramatic action scene with sparks and slow motion']],
+ music:[['🎹 Synthwave','An 80s synthwave track for a midnight drive along the coast'],['🎤 Crew anthem','A hype rap anthem about the GTA6 Agent crew'],['📻 Radio jingle','A cheesy 80s radio station jingle for Vice City FM']]
+};
+$$('.sx-free').forEach(e=>e.textContent=C.freeCredits);
+
+/* ---------- backend ---------- */
+let sb=null;try{if(window.supabase)sb=window.supabase.createClient(C.supabaseUrl,C.supabaseAnonKey)}catch(e){}
+let session=null,credits=0,vcfg={cps:5,cpsAudio:8},hist=[],buyCoin='USDC',currentOrder=null,currentPack=null,payTimer=null,pendingPack=null,loadedFor=null;
+let agent=LIVEC[0],kind='image',tvSec=C.videoLengths[C.videoLengths.length-1].seconds,pdur=C.photoLengths[0],photo=null,AW=null;
+async function call(fn,body){
+ if(!session)throw new Error('Please connect your wallet');
+ let r;try{r=await fetch(`${C.supabaseUrl}/functions/v1/${fn}`,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.supabaseAnonKey,Authorization:'Bearer '+session.access_token},body:JSON.stringify(body)})}
+ catch(e){throw new Error('Connection problem — check your internet')}
+ const j=await r.json().catch(()=>({error:'Server error'}));
+ if(!r.ok||j.error){const e=new Error(j.error||'Something went wrong');e.data=j;throw e}
+ return j}
+const api=b=>call(C.functionName,b);
+const VFN=[C.videoFunction,'pokerface-video','Pokerface---video-'].filter((v,i,a)=>v&&a.indexOf(v)===i);let vfnOk=null;
+async function vapi(b){if(vfnOk)return call(vfnOk,b);let last;
+ for(const fn of VFN){try{const r=await call(fn,b);vfnOk=fn;return r}catch(e){last=e;if(e.data){vfnOk=fn;throw e}}}throw last}
+
+/* ---------- account ---------- */
+const isGuest=()=>!!session?.user?.is_anonymous;
+const walletAddr=()=>{const u=session?.user;if(!u)return'';const i=(u.identities||[]).find(x=>x.identity_data?.address||x.identity_data?.custom_claims?.address);
+ return u.user_metadata?.custom_claims?.address||u.user_metadata?.address||i?.identity_data?.address||i?.identity_data?.custom_claims?.address||''};
+function paint(){
+ $$('.sx-cred-n').forEach(e=>e.textContent=Number(credits||0).toLocaleString());
+ const signed=!!session&&!isGuest(),w=walletAddr();
+ $('#sxConnect').classList.toggle('sx-h',signed);$('#sxOut').classList.toggle('sx-h',!signed);
+ $('#sxWho').textContent=signed?(w?'👛 '+w.slice(0,4)+'…'+w.slice(-4):'👛 Connected'):session?'Guest':'Not connected';
+ refresh()}
+async function refreshCredits(){if(!session||!sb){credits=0;return paint()}
+ try{const{data}=await sb.from('profiles').select('credits').eq('id',session.user.id).single();credits=data?.credits??0}catch(e){}paint()}
+const getWallet=()=>(window.phantom?.solana?.isPhantom?window.phantom.solana:null)||window.solflare||window.solana||null;
+function waitForWallet(ms=3000){return new Promise(res=>{if(getWallet())return res(getWallet());const t0=Date.now();const iv=setInterval(()=>{const w=getWallet();if(w||Date.now()-t0>ms){clearInterval(iv);res(w)}},100);window.addEventListener('phantom#initialized',()=>{clearInterval(iv);res(getWallet())},{once:true})})}
+const withTimeout=(p,ms,msg)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error(msg)),ms))]);
+function modal(id,on){$('#'+id).classList.toggle('on',on);if(!on&&id==='sxPay'&&payTimer){clearInterval(payTimer);payTimer=null}}
+$$('.sx-modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m||e.target.closest('[data-sxclose]'))modal(m.id,false)}));
+function openSignIn(msg){$('#sxAuthMsg').innerHTML=msg?E(msg):'';$('#sxWalletHint').textContent=(!getWallet()&&isMobile)?'This opens GTA6 Agent inside the Phantom app, where you can connect.':'';modal('sxAuth',true)}
+let connecting=false;
+async function connectWallet(){
+ if(connecting)return;if(!sb){$('#sxAuthMsg').innerHTML='<span class="err">The studio couldn’t load — check your connection and refresh.</span>';return}
+ connecting=true;const b=$('#sxPhantomIn');b.disabled=true;b.textContent='Looking for your wallet…';
+ const w=await waitForWallet();
+ if(!w){b.disabled=false;b.textContent='Connect Phantom';connecting=false;
+  if(isMobile&&!inWalletApp){const target=location.origin+location.pathname+'?connect=1';location.href=`https://phantom.app/ul/browse/${encodeURIComponent(target)}?ref=${encodeURIComponent(location.origin)}`;return}
+  $('#sxAuthMsg').innerHTML='No Solana wallet found in this browser. <a href="https://phantom.app/download" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">Get Phantom</a> (free), then refresh this page.';return}
+ b.textContent='Approve in your wallet…';
+ try{
+  await withTimeout(w.connect(),20000,'Phantom didn’t respond. Tap Connect Phantom again.');
+  const statement='Sign in to GTA6 Agent. This is free and does not send a transaction.';
+  const tmsg='No approval came back from Phantom. Tap Connect Phantom again and approve the sign-in message.';
+  let res;
+  try{res=await withTimeout(sb.auth.signInWithWeb3({chain:'solana',statement,wallet:w}),60000,tmsg);if(res.error)throw res.error}
+  catch(e1){if(e1?.code===4001||/reject|cancel|declin/i.test(e1?.message||''))throw e1;
+   const simple={publicKey:w.publicKey,signMessage:async msg=>{const out=await w.signMessage(msg,'utf8');return out?.signature||out}};
+   res=await withTimeout(sb.auth.signInWithWeb3({chain:'solana',statement,wallet:simple}),60000,tmsg);if(res.error)throw res.error}
+  toast('Wallet connected ✅');
+ }catch(err){
+  let m=err?.code===4001?'Sign-in cancelled in your wallet.':(err?.message||'Sign-in failed — please try again.');
+  if(/disabled|not enabled|unsupported provider/i.test(m))m='Wallet sign-in is switched off on the server (Supabase → Authentication → Sign In / Providers → Web3 Wallet → enable Solana).';
+  else if(/url|uri|domain|redirect/i.test(m))m='This web address isn’t allowed yet (Supabase → Authentication → URL Configuration: add '+location.origin+').';
+  $('#sxAuthMsg').innerHTML=`<span class="err">${E(m)}</span>`}
+ b.disabled=false;b.textContent='Connect Phantom';connecting=false}
+$('#sxPhantomIn').onclick=connectWallet;
+$('#sxConnect').onclick=()=>openSignIn();
+$('#sxOut').onclick=async()=>{modal('sxBuyM',false);try{await sb.auth.signOut()}catch(_){}try{await getWallet()?.disconnect?.()}catch(_){}toast('Disconnected')};
+async function onAuth(){
+ paint();
+ if(!session){loadedFor=null;credits=0;hist=[];paintHist();paint();return}
+ if(!isGuest())modal('sxAuth',false);
+ if(loadedFor!==session.user.id){loadedFor=session.user.id;
+  try{const c=await vapi({action:'config'});vcfg={...vcfg,...c};refresh()}catch(_){}
+  await refreshCredits();loadHistory();
+  try{const r=await api({action:'checkPending'});if(r.paid)refreshCredits()}catch(_){}}
+ if(pendingPack!==null&&!isGuest()){const p=pendingPack;pendingPack=null;openBuy();startOrder(p)}}
+if(sb){
+ sb.auth.onAuthStateChange((_e,s)=>{session=s;onAuth()});
+ (async()=>{
+  const h=new URLSearchParams(location.hash.slice(1));
+  if(h.get('ph_at')&&h.get('ph_rt')){history.replaceState(null,'',location.pathname+location.search);
+   try{await sb.auth.setSession({access_token:h.get('ph_at'),refresh_token:h.get('ph_rt')})}catch(_){}
+   if(h.get('cur'))buyCoin=h.get('cur');if(h.get('buy')!==null)pendingPack=Number(h.get('buy'));
+   setTimeout(()=>$('#studio').scrollIntoView({behavior:'smooth'}),600)}
+  const{data}=await sb.auth.getSession();session=data.session;onAuth();
+  const q=new URLSearchParams(location.search),flagged=q.get('connect')==='1';
+  if(flagged){q.delete('connect');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash);setTimeout(()=>$('#studio').scrollIntoView({behavior:'smooth'}),600)}
+  const w0=await waitForWallet(3000);
+  if((!session||isGuest())&&w0&&flagged){openSignIn();$('#sxWalletHint').textContent='Tap Connect Phantom, then approve in the pop-up.'}
+ })();
+}
+async function ensureSession(){
+ if(session)return true;if(!sb)return false;
+ try{const{data,error}=await sb.auth.signInAnonymously();if(error||!data?.session)throw error||new Error('no session');session=data.session;await onAuth();return true}
+ catch(_){return false}}
+
+/* ---------- costs + checks ---------- */
+function costOf(k,o){if(k==='photo')return Math.round(o.dur*(o.sound?vcfg.cpsAudio:vcfg.cps));
+ if(k==='video')return(C.videoLengths.find(v=>v.seconds===o.secs)||C.videoLengths[0]).cost;return C.costs[k]}
+async function precheck(k,o){
+ if(!sb)return{why:'load',msg:'The studio couldn’t load — check your connection and refresh.'};
+ if(!(await ensureSession()))return{why:'wallet',msg:'Connect your wallet to start creating.'};
+ await refreshCredits();const need=costOf(k,o);
+ if(need>credits)return isGuest()?{why:'wallet',msg:`Connect your wallet (free) to get your ${C.freeCredits} free credits — this one needs ${need}.`}:{why:'credits',msg:`You need ${need} credits for this — you have ${credits}.`};
+ return null}
+function sendOff(bad){if(bad.why==='wallet')openSignIn(bad.msg);else if(bad.why==='credits')openBuy();else toast(bad.msg)}
+
+/* ---------- making things ---------- */
+const imgOf=url=>new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=()=>rej();im.src=url});
+async function shrink(file){const url=URL.createObjectURL(file),im=await imgOf(url);URL.revokeObjectURL(url);
+ const k=Math.min(1,1920/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');
+ c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);
+ const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);return c.toDataURL('image/jpeg',0.9)}
+/* h = {progress(t,label), done(url), fail(msg,why)} — checks already done by precheck */
+async function create(k,prompt,o,h){
+ const p=(o.vice?prompt+KINDS[k].vice:prompt)||'Bring this photo to life';
+ if(k==='photo'){
+  let d;try{h.progress(.02,'Uploading your photo…');const img=await shrink(o.file);h.progress(.04,'Sending to the studio…');
+   d=await vapi({action:'generate',image:img,end_image:null,prompt:p,negative_prompt:'',duration:o.dur,audio:!!o.sound,effect:'none',num:1})}
+  catch(e){return h.fail(e.data?.needCredits?'You’re out of credits.':e.message,e.data?.needCredits?'credits':'')}
+  if(d.credits!=null){credits=d.credits;paint()}
+  if(!d.jobs||!d.jobs.length)return h.fail('Couldn’t start this one — credits given back');
+  const id=d.jobs[0];hist.unshift({id,kind:'photo',prompt,status:'queued',duration:o.dur,at:new Date().toISOString()});paintHist();
+  return pollPhoto(id,o.dur,h)}
+ let g;try{({generation:g}=await api({action:'generate',prompt:p,tool:k,...(k==='video'?{seconds:o.secs}:{})}))}
+ catch(e){return h.fail(e.data?.needCredits?'You’re out of credits.':e.message,e.data?.needCredits?'credits':'')}
+ refreshCredits();hist.unshift({id:g.id,kind:k,prompt,status:g.status,url:g.result_url,at:new Date().toISOString()});paintHist();
+ if(g.status==='done')return h.done(g.result_url);
+ if(g.status!=='queued')return h.fail('That didn’t work — credits refunded');
+ return pollGen(g.id,k,h)}
+async function pollGen(id,k,h){const t0=Date.now(),exp=k==='video'?120e3:k==='music'?60e3:20e3;
+ while(Date.now()-t0<20*60e3){await sleep(5000);h.progress(Math.min(.95,(Date.now()-t0)/exp));
+  let g;try{({generation:g}=await api({action:'jobStatus',id}))}catch(_){continue}
+  if(g.status==='queued')continue;const x=hist.find(z=>z.id===id);if(x)Object.assign(x,{status:g.status,url:g.result_url});paintHist();
+  if(g.status==='done')return h.done(g.result_url);refreshCredits();return h.fail('That didn’t work — credits refunded')}
+ h.fail('Still working — check “Your creations” in a few minutes.')}
+async function pollPhoto(id,dur,h){const t0=Date.now(),exp=(40+dur*9)*1000;
+ while(Date.now()-t0<25*60e3){await sleep(5000);
+  let r;try{r=await vapi({action:'status',job_ids:[id]})}catch(_){continue}
+  if(r.credits!=null){credits=r.credits;paint()}
+  const j=(r.jobs||[]).find(x=>x.id===id);if(!j)continue;const x=hist.find(z=>z.id===id);
+  if(j.status==='done'){if(x){x.status='done';x.url=j.video_url}paintHist();return h.done(j.video_url)}
+  if(j.status==='failed'){if(x)hist.splice(hist.indexOf(x),1);paintHist();return h.fail(j.error||'That one failed — credits given back')}
+  const t=Math.min(.95,(Date.now()-t0)/exp);h.progress(t,j.stage==='making'?`Creating your video… ${Math.round(t*100)}%`:(j.position?`In line — ${j.position} ahead of you`:'Waiting in line…'))}
+ h.fail('Still working — check “Your creations” in a few minutes.')}
+
+/* ---------- showing results ---------- */
+const line=c=>{const v=(c&&c.voice)||GUIDE.voice;return v[Math.floor(Math.random()*v.length)]};
+function mediaHtml(k,url){const u=E(url);
+ if(k==='image')return`<div class="sx-media"><img src="${u}" alt="Made by the crew"></div>`;
+ if(k==='music')return`<div class="sx-media"><audio src="${u}" controls preload="metadata"></audio></div>`;
+ return`<div class="sx-media"><video src="${u}" controls loop muted autoplay playsinline></video></div>`}
+function actsHtml(k,url){const u=E(url),n=`gta6agent-${Date.now()}.${KINDS[k].ext}`;
+ return`<div class="sx-ac"><button type="button" class="hot" data-u="${u}" data-n="${n}" onclick="STUDIO.save(this.dataset.u,this.dataset.n)">⬇ Download</button><button type="button" data-u="${u}" data-n="${n}" onclick="STUDIO.share(this.dataset.u,this.dataset.n)">Share</button></div>`}
+async function save(url,name){try{const bl=await(await fetch(url)).blob(),u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}catch(_){window.open(url,'_blank')}}
+async function share(url,name){try{const bl=await(await fetch(url)).blob(),f=new File([bl],name,{type:bl.type});if(navigator.canShare?.({files:[f]}))return navigator.share({files:[f],title:'Made with GTA6 Agent'})}catch(_){}
+ try{if(navigator.share)return await navigator.share({url,title:'Made with GTA6 Agent'});await navigator.clipboard.writeText(url);toast('Link copied')}catch(_){}}
+
+/* ---------- Studio section ---------- */
+function drawCrew(){$('#sxCrew').innerHTML=LIVEC.map((c,i)=>`<button type="button" data-i="${i}" class="${c===agent?'on':''}" style="--c:${c.c}"><img src="${c.img}" alt="">${E(c.name)}</button>`).join('');
+ $$('#sxCrew button').forEach(b=>b.onclick=()=>{agent=LIVEC[+b.dataset.i];drawCrew()})}
+function opts(){return{dur:pdur,secs:tvSec,sound:$('#sxSound').checked,vice:$('#sxVice').checked,file:photo&&photo.file}}
+function refresh(){const c=costOf(kind,opts());$('#sxCost').textContent=`${c} credit${c===1?'':'s'}`;
+ const t=$('#sxPrompt').value.trim();$('#sxGo').disabled=kind==='photo'?!photo:t.length<3;
+ $('#sxPrompt').placeholder=kind==='photo'&&photo?'What happens in the video? e.g. she laughs and waves':KINDS[kind].ph}
+function drawStudio(){
+ $$('#sxTabs button').forEach(b=>b.classList.toggle('on',b.dataset.k===kind));
+ $('#sxPhoto').classList.toggle('sx-h',kind!=='photo');$('#sxSoundW').classList.toggle('sx-h',kind!=='photo');
+ const L=kind==='photo'?C.photoLengths:kind==='video'?C.videoLengths.map(v=>v.seconds):[],cur=kind==='photo'?pdur:tvSec;
+ $('#sxLen').classList.toggle('sx-h',!L.length);
+ $('#sxLen').innerHTML=L.map(s=>`<button type="button" data-v="${s}" class="${s===cur?'on':''}">${s} sec</button>`).join('');
+ $$('#sxLen button').forEach(b=>b.onclick=()=>{if(kind==='photo')pdur=+b.dataset.v;else tvSec=+b.dataset.v;drawStudio()});
+ $('#sxSugs').innerHTML=SUGS[kind].map(([l,p])=>`<button type="button" data-p="${E(p)}">${E(l)}</button>`).join('');
+ $$('#sxSugs button').forEach(b=>b.onclick=()=>{$('#sxPrompt').value=b.dataset.p;if(kind==='photo'&&!photo)$('#sxFile').click();refresh()});
+ $('#sxNote').textContent=`${KINDS[kind].title}s take ${KINDS[kind].wait}. AI can make mistakes.`;
+ refresh()}
+$$('#sxTabs button').forEach(b=>b.onclick=()=>{kind=b.dataset.k;drawStudio()});
+$('#sxSound').onchange=refresh;$('#sxPrompt').oninput=refresh;
+$('#sxPrompt').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&innerWidth>800){e.preventDefault();if(!$('#sxGo').disabled)$('#sxGo').click()}};
+function drawThumb(){$('#sxThumb').innerHTML=photo?`<div class="sx-thumb"><img src="${photo.url}" alt=""><button type="button" aria-label="Remove">✕</button></div>`:'';
+ $('#sxAttach').textContent=photo?'📷 Change photo':'📷 Add your photo';
+ const rm=$('#sxThumb button');if(rm)rm.onclick=()=>{photo=null;drawThumb();refresh()}}
+$('#sxAttach').onclick=()=>$('#sxFile').click();
+$('#sxFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;
+ if(!/^image\/(png|jpe?g|webp)$/.test(file.type))return toast('Please choose a JPG, PNG or WEBP photo');
+ const url=URL.createObjectURL(file);
+ try{const im=await imgOf(url),w=im.naturalWidth,h=im.naturalHeight;
+  if(Math.min(w,h)<300){URL.revokeObjectURL(url);return toast('That photo is too small — use one at least 300 pixels wide')}
+  if(Math.max(w/h,h/w)>2.5){URL.revokeObjectURL(url);return toast('That photo is too stretched — crop it a bit squarer')}}
+ catch(_){URL.revokeObjectURL(url);return toast('Couldn’t open that photo')}
+ photo={url,file};kind='photo';drawStudio();drawThumb();refresh();$('#sxPrompt').focus()};
+function feedCard(c,k,prompt,o){const d=document.createElement('div');d.className='sx-card';d.style.setProperty('--c',c.c||'#ff2e88');
+ const spec=k==='video'?' · '+o.secs+' sec':k==='photo'?' · '+o.dur+' sec'+(o.sound?' · sound':''):'';
+ d.innerHTML=`<div class="sx-ch">${c.img?`<img src="${c.img}" alt="">`:''}<div><b>${E(c.name)}</b><small>${KINDS[k].icon} ${KINDS[k].title}${spec}</small></div></div>
+  <div class="sx-p">“${E(prompt)}”</div><div class="sx-m"><div class="sx-load"><span>“${E(line(c))}” — making it now (${KINDS[k].wait})…</span><div class="sx-pb"><i></i></div></div></div><div class="sx-acw"></div>`;
+ $('#sxFeed').prepend(d);d.scrollIntoView({behavior:'smooth',block:'nearest'});return d}
+function cardHooks(d,k){const m=d.querySelector('.sx-m');
+ return{progress(t,label){const b=m.querySelector('.sx-pb i'),l=m.querySelector('.sx-load span');if(b)b.style.width=Math.round(t*100)+'%';if(l&&label)l.textContent=label},
+  done(url){m.className='sx-m'+(k==='music'?' music':'');m.innerHTML=mediaHtml(k,url).replace(/^<div class="sx-media">|<\/div>$/g,'');d.querySelector('.sx-acw').innerHTML=actsHtml(k,url)},
+  fail(msg,why){m.innerHTML=`<div class="sx-load"><span>⚠️ ${E(msg)}</span></div>`;if(why==='credits')openBuy()}}}
+$('#sxGo').onclick=async()=>{const k=kind,o=opts(),prompt=$('#sxPrompt').value.trim(),c=agent;
+ $('#sxGo').disabled=true;
+ const bad=await precheck(k,o);if(bad){sendOff(bad);return refresh()}
+ const d=feedCard(c,k,prompt||'Bring this photo to life',o);
+ if(k==='photo'){photo=null;drawThumb()}$('#sxPrompt').value='';refresh();
+ create(k,prompt,o,cardHooks(d,k))};
+function openSection(c,k){try{panel.classList.remove('open')}catch(_){}
+ if(c&&c.id!=='guide'&&LIVEC.includes(c))agent=c;if(k)kind=k;drawCrew();drawStudio();
+ setTimeout(()=>$('#studio').scrollIntoView({behavior:'smooth'}),200)}
+
+/* ---------- your creations ---------- */
+function paintHist(){const box=$('#sxHist');box.innerHTML='';
+ if(!hist.length){box.innerHTML=`<div class="none">${session?'Nothing yet — make something above':'Connect to see your creations'}</div>`;return}
+ hist.slice(0,60).forEach(h=>{const b=document.createElement('button');b.type='button';b.textContent=`${(KINDS[h.kind]||{icon:'✦'}).icon} ${h.prompt||'Untitled'}`;
+  b.onclick=()=>{const d=feedCard(agent,h.kind,h.prompt||'Untitled',{secs:'',dur:h.duration||''}),hk=cardHooks(d,h.kind);
+   if(h.status==='queued'){hk.progress(.5,'Still working on this one…');h.kind==='photo'?pollPhoto(h.id,h.duration||5,hk):pollGen(h.id,h.kind,hk)}else if(h.url)hk.done(h.url);else hk.fail('Nothing to show for this one')};
+  box.appendChild(b)})}
+async function loadHistory(){if(!session){hist=[];return paintHist()}const out=[];
+ try{const{data}=await sb.from('generations').select('*').eq('user_id',session.user.id).neq('status','failed').order('created_at',{ascending:false}).limit(60);
+  (data||[]).filter(g=>KINDS[g.tool]).forEach(g=>out.push({id:g.id,kind:g.tool,prompt:g.prompt,status:g.status,url:g.result_url,at:g.created_at}))}catch(_){}
+ try{const r=await vapi({action:'history'});(r.items||[]).forEach(j=>out.push({id:j.id,kind:'photo',prompt:j.prompt,status:j.status,url:j.video_url,duration:j.duration,at:j.created_at}))}catch(_){}
+ out.sort((a,b)=>new Date(b.at)-new Date(a.at));hist=out;paintHist()}
+
+/* ---------- buying credits (USDC / SOL on Solana) ---------- */
+function openBuy(){if(!session||isGuest()){openSignIn('Connect your wallet to buy credits.');return}drawBuy();modal('sxBuyM',true)}
+$('#sxBuy').onclick=$('#sxCredBtn').onclick=()=>openBuy();
+function drawBuy(){const coins=['USDC','SOL'];if(!coins.includes(buyCoin))buyCoin='USDC';
+ $('#sxRate').textContent=`An image is ${C.costs.image} credit, a song ${C.costs.music}, a ${C.videoLengths[0].seconds} sec video ${C.videoLengths[0].cost}. No subscription.`;
+ $('#sxCoins').style.gridTemplateColumns=`repeat(${coins.length},1fr)`;
+ $('#sxCoins').innerHTML=coins.map(k=>`<button type="button" data-c="${k}" class="${k===buyCoin?'on':''}">Pay with ${k}</button>`).join('');
+ $$('#sxCoins button').forEach(b=>b.onclick=()=>{buyCoin=b.dataset.c;drawBuy()});
+ $('#sxPacks').innerHTML=C.packs.map((p,i)=>`<button type="button" class="sx-pack" data-pack="${i}"><div><b>${p.credits.toLocaleString()} credits${p.best?'<span class="best">BEST VALUE</span>':''}</b><small>about ${Math.floor(p.credits/C.costs.image)} images or ${Math.floor(p.credits/C.videoLengths[0].cost)} videos</small></div><span class="pr">$${p.usd}</span></button>`).join('');
+ $$('.sx-pack').forEach(b=>b.onclick=()=>startOrder(+b.dataset.pack,b))}
+async function startOrder(pack,b){b=b||document.createElement('button');currentPack=pack;b.disabled=true;b.style.opacity=.6;
+ try{const{order,payUrl}=await api({action:'createOrder',pack,currency:buyCoin});
+  currentOrder=order;const ph=getWallet();
+  $('#sxPayTitle').textContent=`Pay with ${order.currency}`;$('#sxPayAmt').textContent=`${order.amount} ${order.currency}`;
+  $('#sxPayFor').textContent=`for ${order.credits} credits ($${Number(order.usd)})`;
+  $('#sxPayAmtCopy').textContent=order.amount;$('#sxPayWallet').textContent=order.wallet;
+  const openInApp=!ph&&isMobile&&!inWalletApp;$('#sxOpt1').classList.toggle('sx-h',!ph&&!openInApp);
+  $('#sxPayPh').textContent=ph?(ph.isPhantom?'Pay with Phantom':'Pay with my wallet'):'Open in Phantom to pay';
+  $('#sxQr').innerHTML='';$('#sxQr').classList.toggle('sx-h',isMobile);
+  if(window.QRCode&&!isMobile&&payUrl)new QRCode($('#sxQr'),{text:payUrl,width:180,height:180,correctLevel:QRCode.CorrectLevel.M});
+  $('#sxPayNote').innerHTML=`Only send <b>${E(order.currency)} on the Solana network</b>.`+(order.currency==='SOL'?' This SOL price is held for 30 minutes.':'');
+  $('#sxPayStatus').innerHTML='<i class="sx-spin"></i>Waiting for payment…';
+  modal('sxBuyM',false);modal('sxPay',true);watchPayment(order)}
+ catch(err){toast(err.message)}
+ b.disabled=false;b.style.opacity=''}
+function watchPayment(order,signature){if(payTimer)clearInterval(payTimer);const t0=Date.now();
+ const tick=async()=>{try{const r=await api({action:'checkPayment',orderId:order.id,signature});
+  if(r.status==='paid'){clearInterval(payTimer);payTimer=null;$('#sxPayStatus').innerHTML=`<span class="ok">✅ Paid! ${order.credits} credits added.</span>`;refreshCredits();setTimeout(()=>modal('sxPay',false),2500)}
+  else if(Date.now()-t0>15*60e3){clearInterval(payTimer);payTimer=null;$('#sxPayStatus').textContent='Still waiting — if you paid, your credits will appear next time you visit.'}}catch(_){}};
+ payTimer=setInterval(tick,5000);if(signature)setTimeout(tick,1500)}
+function loadScript(s){return new Promise((res,rej)=>{const e=document.createElement('script');e.src=s;e.crossOrigin='anonymous';e.onload=res;e.onerror=()=>rej(new Error('Could not load '+s));document.head.appendChild(e)})}
+async function ensureWeb3(){if(window.solanaWeb3)return window.solanaWeb3;
+ for(const s of['https://unpkg.com/@solana/web3.js@1.95.3/lib/index.iife.min.js','https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js']){try{await loadScript(s);if(window.solanaWeb3)return window.solanaWeb3}catch(_){}}
+ throw new Error('The payment library didn’t load. Check your connection and refresh the page.')}
+const B58='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+function fromBase58(str){const bytes=[0];for(const ch of str){let carry=B58.indexOf(ch);if(carry<0)throw new Error('bad base58');for(let i=0;i<bytes.length;i++){carry+=bytes[i]*58;bytes[i]=carry&255;carry>>=8}while(carry){bytes.push(carry&255);carry>>=8}}for(const ch of str){if(ch==='1')bytes.push(0);else break}return Uint8Array.from(bytes.reverse())}
+function fromBase64(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';return Uint8Array.from(atob(str),c=>c.charCodeAt(0))}
+function decodeTx(web3,raw){raw=String(raw||'').trim();if(!raw)throw new Error('The server didn’t send a transaction to sign.');const tries=[];try{tries.push(fromBase64(raw))}catch(_){}try{tries.push(fromBase58(raw))}catch(_){}
+ for(const bytes of tries){try{return web3.Transaction.from(bytes)}catch(_){}try{return web3.VersionedTransaction.deserialize(bytes)}catch(_){}}throw new Error('Couldn’t read the payment transaction from the server.')}
+function walletErrorText(err,cur){const code=err?.code,m=err?.message||String(err||'');
+ if(code===4001||/reject|cancel|declin/i.test(m))return'Payment cancelled in Phantom — nothing was taken.';
+ if(code===4100||/unauthori[sz]ed/i.test(m))return'Phantom isn’t connected to this site yet — tap again and approve the connection.';
+ if(code===-32603||/insufficient|0x1\b|debit an account/i.test(m))return`Phantom couldn’t send it. Usually there isn’t enough ${cur||'USDC'}, or not a little SOL for the network fee (about 0.001 SOL).`;
+ if(/blockhash/i.test(m))return'The payment expired before it was approved — tap again.';return m||'Payment didn’t go through.'}
+$('#sxPayPh').onclick=async()=>{if(!currentOrder)return;const ph=getWallet();
+ if(!ph){const hash=new URLSearchParams({buy:String(currentPack),cur:currentOrder.currency});if(session){hash.set('ph_at',session.access_token);hash.set('ph_rt',session.refresh_token)}
+  const target=location.origin+location.pathname+'?connect=1#'+hash;location.href=`https://phantom.app/ul/browse/${encodeURIComponent(target)}?ref=${encodeURIComponent(location.origin)}`;return}
+ const b=$('#sxPayPh');b.disabled=true;b.textContent='Getting things ready…';
+ try{const web3=await ensureWeb3();b.textContent='Approve in Phantom…';
+  const r=await ph.connect();const pk=r?.publicKey||ph.publicKey;if(!pk)throw new Error('Phantom didn’t share your wallet address — open Phantom and try again.');
+  const built=await api({action:'buildTx',orderId:currentOrder.id,payer:pk.toString()});
+  const t=decodeTx(web3,built.tx||built.transaction);b.textContent='Confirm in Phantom…';
+  const sent=await ph.signAndSendTransaction(t);const signature=typeof sent==='string'?sent:sent?.signature;
+  $('#sxPayStatus').innerHTML='<i class="sx-spin"></i>Payment sent — confirming…';watchPayment(currentOrder,signature)}
+ catch(err){$('#sxPayStatus').innerHTML=`<span class="err">${E(walletErrorText(err,currentOrder?.currency))}</span>`}
+ b.disabled=false;b.textContent=ph?.isPhantom?'Pay with Phantom':'Pay with my wallet'};
+$('#sxPay').addEventListener('click',async e=>{const b=e.target.closest('[data-sxcopy]');if(!b)return;try{await navigator.clipboard.writeText($('#'+b.dataset.sxcopy).textContent);b.textContent='Copied ✓'}catch(_){b.textContent='Hold to copy'}setTimeout(()=>b.textContent='Copy',2000)});
+
+/* ---------- inside the agent chats ---------- */
+const MAKE_CHIP='🎨 Make a pic, video or song';
+const KIND_CHIPS=['🖼️ Make an image','🎥 Make a video','🎵 Make a song','🎬 Animate my photo'];
+const who=()=>(typeof TALK!=='undefined'&&TALK)||GUIDE;
+function detect(t){const q=t.toLowerCase();
+ if(!/\b(make|create|generate|draw|design|produce|render|paint|compose|animate|turn)\b/.test(q))return'';
+ if(/\b(trade plan|post|posts|tweet|thread|agent|portfolio)\b/.test(q)&&!/\b(image|picture|pic|video|song|music|logo|poster|beat)\b/.test(q))return'';
+ if(/\b(animate|bring to life)\b/.test(q)||/\b(my|this) (photo|picture|pic|selfie)\b.*\b(video|move|moving|alive)\b/.test(q))return'photo';
+ if(/\b(music video|video|videos|clip|movie|film|reel|animation)\b/.test(q))return'video';
+ if(/\b(song|songs|music|beat|track|jingle|tune|rap|anthem|melody|instrumental|soundtrack)\b/.test(q))return'music';
+ if(/\b(image|images|picture|pictures|pic|pics|photo|logo|poster|art|artwork|drawing|illustration|wallpaper|banner|pfp|avatar|meme|thumbnail|cover|sticker)\b/.test(q))return'image';
+ return''}
+function chip(t){
+ if(t===MAKE_CHIP){const c=who();addMsg(`${c===GUIDE?'The crew':'<b>'+E(c.name)+'</b>'} can make it for you — pick one 👇<br><small>Uses credits · new wallets get ${C.freeCredits} free.</small>`,'bot',KIND_CHIPS.concat(['Back to the guide']));return true}
+ if(t==='🎬 Animate my photo'||t==='🎬 Open the Studio'){AW=null;openSection(who(),'photo');return true}
+ if(t==='🎨 Open the Studio'){AW=null;openSection(who(),null);return true}
+ const k=Object.keys(KINDS).find(x=>KINDS[x].chip===t);
+ if(k){AW=k;addMsg(`<b>${KINDS[k].icon} ${KINDS[k].title}</b><br>Describe what you want and I’ll make it — or tap an idea.`,'bot',SUGS[k].map(s=>s[0]).concat(['Back to the guide']));setTimeout(()=>$('#chatInput').focus(),300);return true}
+ if(t==='💳 Buy credits'){openBuy();return true}
+ if(t==='🔗 Connect wallet'){openSignIn();return true}
+ if(AW){const kk=AW;AW=null;if(!NAV_CHIPS.includes(t)){const s=SUGS[kk].find(x=>x[0]===t);addMsg(E(t),'me');chat(kk,s?s[1]:t);return true}}
+ return false}
+async function chat(k,prompt){const c=who();
+ if(k==='photo'){addMsg(`To animate a photo I need the photo itself — add it in the Studio and ${c===GUIDE?'the crew':E(c.name)} will bring it to life 👇`,'bot',['🎬 Open the Studio']);return}
+ const o={secs:tvSec,vice:$('#sxVice').checked};
+ const ui=agentUI(c,KINDS[k].title+' maker'),box=msgs.lastElementChild;
+ let s=ui.step('Getting your credits ready');
+ const bad=await precheck(k,o);
+ if(bad){s.bad(bad.why==='credits'?credits+' credits':'not connected');return ui.fail(E(bad.msg),bad.why==='credits'?['💳 Buy credits']:bad.why==='wallet'?['🔗 Connect wallet']:[MAKE_CHIP])}
+ const need=costOf(k,o);s.ok(`${need} credit${need===1?'':'s'} · you have ${credits}`);
+ s=ui.step(`Making your ${KINDS[k].title.toLowerCase()} — ${KINDS[k].wait}`);const sm=box.querySelector('ul li:last-child small');
+ await create(k,prompt,o,{
+  progress(t){if(sm)sm.innerHTML=' — '+Math.round(t*100)+'%'},
+  done(url){s.ok('done');ui.deliver(`<b>${E(line(c))}</b>${mediaHtml(k,url)}${actsHtml(k,url)}<small>Saved to “Your creations” in the Studio.</small>`,`Here's your ${KINDS[k].title.toLowerCase()}.`,['🖼️ Make an image','🎥 Make a video','🎵 Make a song'])},
+  fail(msg,why){s.bad();ui.fail(E(msg),why==='credits'?['💳 Buy credits']:[MAKE_CHIP])}})}
+
+drawCrew();drawStudio();paint();paintHist();
+return{chip,detect,chat,open:openSection,save,share,MAKE_CHIP};
+})();
 </script>
 </body>
 </html>
