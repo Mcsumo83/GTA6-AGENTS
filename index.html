@@ -434,6 +434,19 @@ footer{color:var(--soft);border-top:1px solid rgba(255,46,136,.2)}
 .ag-post{margin:8px 0;padding:8px;border-radius:10px;background:rgba(255,255,255,.08)}
 </style>
 <style>
+.sx-guide{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:600px){.sx-guide{grid-template-columns:1fr}}
+.sx-gcol{background:rgba(255,210,63,.08);border:1px solid rgba(255,210,63,.35);border-radius:16px;padding:14px;font-size:14px;color:var(--soft)}
+.sx-gcol b{display:block;color:#fff;font-size:15px;margin-bottom:4px}.sx-gcol span b{display:inline;color:var(--yellow)}
+.sx-free-col{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.4)}
+.sx-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:700px){.sx-steps{grid-template-columns:1fr 1fr}}
+.sx-steps div{background:rgba(255,255,255,.05);border-radius:14px;padding:12px;font-size:13px;color:var(--soft)}
+.sx-steps i{display:inline-flex;width:24px;height:24px;border-radius:50%;background:linear-gradient(90deg,var(--pink),var(--orange));color:#fff;font-style:normal;font-weight:800;align-items:center;justify-content:center;font-size:13px;margin-bottom:6px}
+.sx-steps b{display:block;color:#fff;font-size:14px}.sx-steps span b{display:inline;color:var(--yellow);font-size:13px}.sx-steps a{color:var(--cyan)}
+.sx-prices{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;font-size:13px}
+.sx-prices span{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;color:var(--soft)}
+.sx-prices span b{color:var(--yellow)}
 /* ===== CREW STUDIO ===== */
 .sx-h{display:none!important}
 #studio .sx{margin-top:30px;background:linear-gradient(160deg,#1a0f33,#2b0f50);border:1px solid rgba(255,46,136,.3);box-shadow:0 0 50px rgba(255,46,136,.12);border-radius:30px;padding:26px;color:#fff}
@@ -594,7 +607,7 @@ const STUDIO_CFG = {
         <span class="idea" data-c="studio">🎨 Make a pic, video or song</span>
         <span class="idea" data-c="talk">💬 Ask anything</span>
       </div>
-      <div class="trust"><span>✅ Free to try</span><span>🔐 Never asks for your seed phrase</span><span>🗣️ Real AI + voice</span></div>
+      <div class="trust"><span>✅ Agents free to use</span><span>🔐 Never asks for your seed phrase</span><span>🗣️ Real AI + voice</span></div>
     </div>
     <a href="#crew" class="round" id="round" aria-label="Meet the crew"><div class="rc" id="rc"></div><div class="rcap" id="rcap"></div><span class="live">9 agents online</span></a>
   </div>
@@ -641,9 +654,26 @@ const STUDIO_CFG = {
     <div class="center reveal">
       <span class="pill">New · Crew Studio</span>
       <h2>The crew makes <span class="hl">videos, music &amp; pics</span></h2>
-      <p class="sub">Pick an agent, say what you want and they’ll make it. You can also just ask any agent in the chat, e.g. “make me a song about Vice City”. New here? Connect a wallet and get <b class="sx-free">10</b> free credits.</p>
+      <p class="sub">Pick an agent, say what you want and they’ll make it — or just ask any agent in the chat, e.g. “make me a song about Vice City”. Chatting is always free; making pics, videos and songs uses credits, and you get <b class="sx-free">10</b> free to start.</p>
     </div>
     <div class="sx reveal">
+      <div class="sx-guide">
+        <div class="sx-gcol sx-free-col">
+          <b>✅ Always free — no wallet</b>
+          <span>Chat with any agent, ask anything, coin scam checks, trade plans, live prices, X posts, yields and wallet checks.</span>
+        </div>
+        <div class="sx-gcol">
+          <b>🪙 Uses credits</b>
+          <span>Making images, videos and songs. Every new wallet gets <b class="sx-free">10</b> free credits to try it.</span>
+        </div>
+      </div>
+      <div class="sx-steps">
+        <div><i>1</i><b>Get Phantom</b><span>Free wallet app from <a href="https://phantom.app/download" target="_blank" rel="noopener">phantom.app</a></span></div>
+        <div><i>2</i><b>Connect it here</b><span>Tap Connect wallet — free, no payment. You get <b class="sx-free">10</b> credits.</span></div>
+        <div><i>3</i><b>Make something</b><span>Pick an agent, choose what to make and describe it.</span></div>
+        <div><i>4</i><b>Top up if you want more</b><span>Pay with USDC or SOL. No subscription.</span></div>
+      </div>
+      <div class="sx-prices" id="sxPrices"></div>
       <div class="sx-bar">
         <button class="sx-cred" id="sxCredBtn">🪙 <b class="sx-cred-n">0</b> credits</button>
         <span class="sx-who" id="sxWho">Not connected</span>
@@ -1107,6 +1137,7 @@ renderCrew();
 /* ===== FAQ ===== */
 const faqs=[
  ['What is GTA6 Agent?','A fan-made site with 9 working AI agents inspired by GTA VI. You give a job in plain words — the agent plans it, does it with live data and hands you the finished result. They even talk back out loud.'],
+ ['Is it free?','Talking to the agents and all their live tools (scam checks, trade plans, prices, posts, yields, wallet checks) is free — no wallet needed. Making images, videos and songs costs credits because each one is made by a paid AI. Connect a free Phantom wallet and you get 10 credits to try it (about 10 images or 1 song). After that, top up from $5 with USDC or SOL — no subscription.'],
  ['Can the agents make videos, music and pictures?','Yes — every agent can. Ask in the chat (e.g. “make me a song about Vice City”) or use the Crew Studio: pick an agent, choose image, video, animate-a-photo or music, and describe it. It uses credits — connect a Phantom wallet for 10 free, then top up with USDC or SOL. Your credits also work on Pokerface.'],
  ['What can the agents actually do?','Lucia: trade plans for any coin. Jason: best Solana yields. Méndez: full scam checks (liquidity, mint & freeze, holders). Macca: X posts with one-tap posting. Gato: live prices and price alarms. Rocco: research & answers. Boobie Ike: portfolio planner. Raul: new-coin scanner. Big Guy: link and wallet checks.'],
  ['Do they trade or move my money?','No. Agents never connect to your wallet. They give you the plan, the verdict or the post plus the link — you make the move yourself. Auto-trading is coming later.'],
@@ -1581,6 +1612,7 @@ const SUGS={
  music:[['🎹 Synthwave','An 80s synthwave track for a midnight drive along the coast'],['🎤 Crew anthem','A hype rap anthem about the GTA6 Agent crew'],['📻 Radio jingle','A cheesy 80s radio station jingle for Vice City FM']]
 };
 $$('.sx-free').forEach(e=>e.textContent=C.freeCredits);
+$('#sxPrices').innerHTML=['🖼️ Image <b>'+C.costs.image+'</b>','🎵 Song <b>'+C.costs.music+'</b>'].concat(C.videoLengths.map(v=>`🎥 ${v.seconds} sec video <b>${v.cost}</b>`)).concat([`🎬 Photo video from <b>${C.photoLengths[0]*5}</b>`,`💵 Packs from <b>$${C.packs[0].usd}</b> for ${C.packs[0].credits} credits`]).map(x=>`<span>${x}</span>`).join('');
 
 /* ---------- backend ---------- */
 let sb=null;try{if(window.supabase)sb=window.supabase.createClient(C.supabaseUrl,C.supabaseAnonKey)}catch(e){}
